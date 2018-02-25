@@ -20,6 +20,8 @@ import bt.protocol.Message;
 import bt.torrent.annotation.Consumes;
 import bt.torrent.annotation.Produces;
 import bt.torrent.messaging.MessageContext;
+import core.CodeCoverage;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -110,53 +112,75 @@ public class MessagingAgentCompiler {
      * @return Total number of consumer/producer methods compiled
      */
     private int compileType(Class<?> type, Collection<ConsumerInfo> consumersAcc, Collection<ProducerInfo> producerAcc) {
-
+    	CodeCoverage cc = new CodeCoverage("MessagingAgentCompiler_compileType");
         int methodCount = 0;
 
         for (Method method : type.getDeclaredMethods()) {
-
+        	System.out.println("#CC# compileType ID:1");
             Consumes consumes = method.getAnnotation(Consumes.class);
             Produces produces = method.getAnnotation(Produces.class);
 
             if (consumes != null || produces != null) {
-
+            	System.out.println("#CC# compileType ID:2");
                 if (!Modifier.isPublic(method.getModifiers())) {
+                	System.out.println("#CC# compileType ID:3");
+                	cc.writeToFile("callFinished");
                     throw new IllegalStateException("Method representing consumer/producer must be public: " + method.getName());
+                } else {
+                	System.out.println("#CC# compileType ID:4");
                 }
                 if (consumes != null && produces != null) {
+                	System.out.println("#CC# compileType ID:5");
+                	cc.writeToFile("callFinished");
                     throw new IllegalStateException("Method can not be both consumer and producer: " + method.getName());
+                } else {
+                	System.out.println("#CC# compileType ID:6");
                 }
 
                 if (consumes != null) {
+                	System.out.println("#CC# compileType ID:7");
                     ConsumerInfo consumerInfo = buildConsumerInfo(method);
                     if (LOGGER.isDebugEnabled()) {
+                    	System.out.println("#CC# compileType ID:8");
                         LOGGER.debug("Compiled consumer method {consumedType=" +
                                 consumerInfo.getConsumedMessageType().getName() +
                                 "}: " + method.getName());
+                    } else {
+                    	System.out.println("#CC# compileType ID:9");
                     }
                     consumersAcc.add(consumerInfo);
                 } else if (produces != null) {
+                	System.out.println("#CC# compileType ID:10");
                     ProducerInfo producerInfo = buildProducerInfo(method);
                     if (LOGGER.isDebugEnabled()) {
+                    	System.out.println("#CC# compileType ID:11");
                         LOGGER.debug("Compiled producer method: " + method.getName());
-                    }
+                    } else {
+                    	System.out.println("#CC# compileType ID:12");
+                    } 
                     producerAcc.add(producerInfo);
                 }
 
                 methodCount++;
+            } else {
+            	System.out.println("#CC# compileType ID:13");
             }
         }
 
         Class<?> supertype = type.getSuperclass();
         if (supertype != null && !Object.class.equals(supertype)) {
+        	System.out.println("#CC# compileType ID:14");
             methodCount += compileType(supertype, consumersAcc, producerAcc);
+        } else {
+        	System.out.println("#CC# compileType ID:15");
         }
 
         Class<?>[] interfaceTypes = type.getInterfaces();
         for (Class<?> interfaceType : interfaceTypes) {
+        	System.out.println("#CC# compileType ID:16");
             methodCount += compileType(interfaceType, consumersAcc, producerAcc);
         }
-
+        cc.writeToFile("callFinished");
         return methodCount;
     }
 
