@@ -365,6 +365,7 @@ public class TorrentDumper implements Component {
 			
 			if(!fromMessages.remove(k, toStore)) {
 				System.out.println("#CC# 5");
+				cc.writeToFile("dumpStats");
 				return;
 			}
 			else System.out.println("#CC# 6");
@@ -377,6 +378,7 @@ public class TorrentDumper implements Component {
 					System.out.println("#CC# 7");
 					if(activeCount.get() > 50 && blocklist.putIfAbsent(toStore.recentSources.get(0).getAddress().getAddress(), now) != null) {
 						System.out.println("#CC# 8");
+						cc.writeToFile("dumpStats");
 						return;
 					}
 					else System.out.println("#CC# 9");
@@ -401,6 +403,7 @@ public class TorrentDumper implements Component {
 						// avoid double-taps promoting things to the priority list
 						if(oldAddrs.containsAll(newAddrs) && old.state == FetchStats.State.INITIAL) {
 							System.out.println("#CC# 14");
+							cc.writeToFile("dumpStats");
 							return;
 						}
 						else System.out.println("#CC# 15");
@@ -415,6 +418,7 @@ public class TorrentDumper implements Component {
 					} catch (IOException e) {
 						log(e);
 						System.out.println("#CC# 17");
+						cc.writeToFile("dumpStats");
 					}
 				}
 				
@@ -448,6 +452,7 @@ public class TorrentDumper implements Component {
 				} catch(Exception ex) {
 					Files.deleteIfExists(tempFile);
 					System.out.println("#CC# 24");
+					cc.writeToFile("dumpStats");
 					throw ex;
 				}
 
@@ -455,6 +460,7 @@ public class TorrentDumper implements Component {
 			} catch (Exception e) {
 				log(e);
 				System.out.println("#CC# 25");
+				cc.writeToFile("dumpStats");
 			}
 			
 			

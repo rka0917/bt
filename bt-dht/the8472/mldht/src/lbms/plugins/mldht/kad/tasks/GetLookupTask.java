@@ -111,6 +111,7 @@ public class GetLookupTask extends IteratingTask {
 		CodeCoverage cc = new CodeCoverage("GetLookupTask_callFinished");
 		if(rsp.getType() != MessageBase.Type.RSP_MSG || rsp.getMethod() != MessageBase.Method.GET) {
 			System.out.println("#CC# 1");
+			cc.writeToFile("callFinished");
 			return;
 		}
 		else System.out.println("#CC# 2");
@@ -120,6 +121,7 @@ public class GetLookupTask extends IteratingTask {
 
 		if(e == null) {
 			System.out.println("#CC# 3");
+			cc.writeToFile("callFinished");
 			return;
 		}
 		else System.out.println("#CC# 4");
@@ -133,6 +135,7 @@ public class GetLookupTask extends IteratingTask {
 			if(!k.equals(targetKey)) {
 				DHT.log("get response fingerprint mismatch " + rsp , LogLevel.Error);
 				System.out.println("#CC# 6");
+				cc.writeToFile("callFinished");
 				return;
 			}
 			else System.out.println("#CC# 7");
@@ -146,6 +149,7 @@ public class GetLookupTask extends IteratingTask {
 				if(data.mutable() && !data.validateSig()) {
 					DHT.log("signature mismatch", LogLevel.Error);
 					System.out.println("#CC# 9");
+					cc.writeToFile("callFinished");
 					return;
 				}
 				else System.out.println("#CC# 10");

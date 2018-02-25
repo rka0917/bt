@@ -90,6 +90,7 @@ public class Assignments {
         LinkedList<Integer> pieces = peers.get(peer);
         if (pieces == null || pieces.isEmpty()) {
         	System.out.println("#CC# 1");
+        	cc.writeToFile("assign");
             return Optional.empty();
         }
         else System.out.println("#CC# 2");
