@@ -21,6 +21,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import core.CodeCoverage;
+
 /**
  * @since 1.2
  */
@@ -144,17 +146,34 @@ class ReadWriteDataRange implements DataRange {
 
     @Override
     public ReadWriteDataRange getSubrange(long offset, long length) {
+    	CodeCoverage cc = new CodeCoverage("./ReadWriteDataRange_getSubRange.txt");
         if (length == 0) {
+        	System.out.println("#CC# getSubRange 1");
+        	cc.writeToFile("callFinished");
             throw new IllegalArgumentException("Requested empty subrange, expected length of 1.." + length());
+        } else {
+        	System.out.println("#CC# getSubRange 2");
         }
         if (offset < 0 || length < 0) {
+        	System.out.println("#CC# getSubRange 3");
+        	cc.writeToFile("callFinished");
             throw new IllegalArgumentException("Illegal arguments: offset (" + offset + "), length (" + length + ")");
+        } else {
+        	System.out.println("#CC# getSubRange 4");
         }
         if (offset >= length()) {
+        	System.out.println("#CC# getSubRange 5");
+        	cc.writeToFile("callFinished");
             throw new IllegalArgumentException("Offset is too large: " + offset + ", expected 0.." + (length() - 1));
+        } else {
+        	System.out.println("#CC# getSubRange 6");
         }
         if (offset == 0 && length == length()) {
+        	System.out.println("#CC# getSubRange 7");
+        	cc.writeToFile("callFinished");
             return this;
+        } else {
+        	System.out.println("#CC# getSubRange 8");
         }
 
         int firstRequestedFileIndex,
@@ -166,47 +185,74 @@ class ReadWriteDataRange implements DataRange {
         // determine the file that the requested block begins in
         firstRequestedFileIndex = -1;
         for (int i = 0; i < units.size(); i++) {
+        	System.out.println("#CC# getSubRange 9");
             if (offset < fileOffsets[i]) {
+            	System.out.println("#CC# getSubRange 10");
                 firstRequestedFileIndex = i - 1;
                 break;
             } else if (i == units.size() - 1) {
+            	System.out.println("#CC# getSubRange 11");
                 // reached the last file
                 firstRequestedFileIndex = i;
+            } else {
+            	System.out.println("#CC# getSubRange 12");
             }
         }
+        System.out.println("#CC# getSubRange 13");
 
         offsetInFirstRequestedFile = offset - fileOffsets[firstRequestedFileIndex];
         if (firstRequestedFileIndex == 0) {
+        	System.out.println("#CC# getSubRange 14");
             // if the first requested file is the first file in chunk,
             // then we need to begin from this chunk's offset in that file
             // (in case this chunk has access only to a portion of the file)
             offsetInFirstRequestedFile += offsetInFirstUnit;
+        } else {
+        	System.out.println("#CC# getSubRange 15");
         }
 
         lastRequestedFileIndex = firstRequestedFileIndex;
         long remaining = length;
+        boolean visited = false;
         do {
+        	if(visited) {
+        		System.out.println("#CC# getSubRange 16");
+        	}
+        	visited = true;
             // determine which files overlap with the requested block
             if (firstRequestedFileIndex == lastRequestedFileIndex) {
+            	System.out.println("#CC# getSubRange 17");
                 remaining -= (units.get(lastRequestedFileIndex).capacity() - offsetInFirstRequestedFile);
             } else {
+            	System.out.println("#CC# getSubRange 18");
                 remaining -= units.get(lastRequestedFileIndex).capacity();
             }
         } while (remaining > 0 && ++lastRequestedFileIndex < units.size());
 
         if (lastRequestedFileIndex >= units.size()) {
+        	System.out.println("#CC# getSubRange 19");
             // data in this chunk is insufficient to fulfill the block request
+        	cc.writeToFile("callFinished");
             throw new IllegalArgumentException("Insufficient data (offset: " + offset + ", requested length: " + length + ")");
+        } else {
+        	System.out.println("#CC# getSubRange 20");
         }
         // if remaining is negative now, then we need to
         // strip off some data from the last file
         limitInLastRequestedFile = units.get(lastRequestedFileIndex).capacity() + remaining;
 
         if (lastRequestedFileIndex == units.size() - 1) {
+        	System.out.println("#CC# getSubRange 21");
             if (limitInLastRequestedFile > limitInLastUnit) {
+            	System.out.println("#CC# getSubRange 22");
                 // data in this chunk is insufficient to fulfill the block request
+            	cc.writeToFile("callFinished");
                 throw new IllegalArgumentException("Insufficient data (offset: " + offset + ", requested length: " + length + ")");
+            } else {
+            	System.out.println("#CC# getSubRange 23");
             }
+        } else {
+        	System.out.println("#CC# getSubRange 24");
         }
 
         List<StorageUnit> _units = new ArrayList<>();
@@ -214,6 +260,7 @@ class ReadWriteDataRange implements DataRange {
         _units.addAll(Arrays.asList(Arrays.copyOfRange(units.toArray(
                 new StorageUnit[len]), firstRequestedFileIndex, lastRequestedFileIndex + 1)));
 
+        cc.writeToFile("callFinished");
         return new ReadWriteDataRange(
                 _units,
                 offsetInFirstRequestedFile,
