@@ -28,6 +28,8 @@ import bt.bencoding.model.ValidationResult;
 import bt.bencoding.model.YamlBEObjectModelLoader;
 import bt.service.CryptoUtil;
 import bt.tracker.AnnounceKey;
+import core.CodeCoverage;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -107,22 +109,33 @@ public class MetadataService implements IMetadataService {
 
     @SuppressWarnings({"rawtypes", "unchecked"})
     private Torrent buildTorrent(BEParser parser) {
-
+    	CodeCoverage cc = new CodeCoverage("MetadataService_buildTorrent");
         if (parser.readType() != BEType.MAP) {
+        	System.out.println("#CC# buildTorrent ID:1");
+        	cc.writeToFile("callFinished");
             throw new BtException("Invalid metainfo format -- expected a map, got: "
                     + parser.readType().name().toLowerCase());
+        } else {
+        	System.out.println("#CC# buildTorrent ID:2");
         }
 
         BEMap metadata = parser.readMap();
 
         ValidationResult validationResult = torrentModel.validate(metadata);;
         if (!validationResult.isSuccess()) {
+        	System.out.println("#CC# buildTorrent ID:3");
             ValidationResult infodictValidationResult = infodictModel.validate(metadata);
             if (!infodictValidationResult.isSuccess()) {
+            	System.out.println("#CC# buildTorrent ID:4");
+            	cc.writeToFile("callFinished");
                 throw new BtException("Validation failed for torrent metainfo:\n1. Standard torrent model: "
                     + Arrays.toString(validationResult.getMessages().toArray())
                         + "\n2. Standalone info dictionary model: " + Arrays.toString(infodictValidationResult.getMessages().toArray()));
+            } else {
+            	System.out.println("#CC# buildTorrent ID:5");
             }
+        } else {
+        	System.out.println("#CC# buildTorrent ID:6");
         }
 
         BEMap infoDictionary;
@@ -130,6 +143,7 @@ public class MetadataService implements IMetadataService {
 
         Map<String, BEObject<?>> root = metadata.getValue();
         if (root.containsKey(INFOMAP_KEY)) {
+        	System.out.println("#CC# buildTorrent ID:7");
             // standard BEP-3 format
             infoDictionary = (BEMap) root.get(INFOMAP_KEY);
             source = new TorrentSource() {
@@ -144,6 +158,7 @@ public class MetadataService implements IMetadataService {
                 }
             };
         } else {
+        	System.out.println("#CC# buildTorrent ID:8");
             // BEP-9 exchanged metadata (just the info dictionary)
             infoDictionary = metadata;
             source = new TorrentSource() {
@@ -162,13 +177,17 @@ public class MetadataService implements IMetadataService {
         DefaultTorrent torrent = new DefaultTorrent(source);
 
         try {
+        	System.out.println("#CC# buildTorrent ID:9");
             torrent.setTorrentId(TorrentId.fromBytes(CryptoUtil.getSha1Digest(infoDictionary.getContent())));
 
             Map<String, BEObject<?>> infoMap = infoDictionary.getValue();
 
             if (infoMap.get(TORRENT_NAME_KEY) != null) {
+            	System.out.println("#CC# buildTorrent ID:10");
                 byte[] name = (byte[]) infoMap.get(TORRENT_NAME_KEY).getValue();
                 torrent.setName(new String(name, defaultCharset));
+            } else {
+            	System.out.println("#CC# buildTorrent ID:11");
             }
 
             BigInteger chunkSize = (BigInteger) infoMap.get(CHUNK_SIZE_KEY).getValue();
@@ -178,15 +197,17 @@ public class MetadataService implements IMetadataService {
             torrent.setChunkHashes(chunkHashes);
 
             if (infoMap.get(TORRENT_SIZE_KEY) != null) {
+            	System.out.println("#CC# buildTorrent ID:12");
                 BigInteger torrentSize = (BigInteger) infoMap.get(TORRENT_SIZE_KEY).getValue();
                 torrent.setSize(torrentSize.longValueExact());
 
             } else {
+            	System.out.println("#CC# buildTorrent ID:13");
                 List<BEMap> files = (List<BEMap>) infoMap.get(FILES_KEY).getValue();
                 List<TorrentFile> torrentFiles = new ArrayList<>(files.size() + 1);
                 BigInteger torrentSize = BigInteger.ZERO;
                 for (BEMap file : files) {
-
+                	System.out.println("#CC# buildTorrent ID:14");
                     Map<String, BEObject<?>> fileMap = file.getValue();
                     DefaultTorrentFile torrentFile = new DefaultTorrentFile();
 
@@ -202,41 +223,52 @@ public class MetadataService implements IMetadataService {
 
                     torrentFiles.add(torrentFile);
                 }
-
                 torrent.setFiles(torrentFiles);
                 torrent.setSize(torrentSize.longValueExact());
             }
 
             boolean isPrivate = false;
             if (infoMap.get(PRIVATE_KEY) != null) {
+            	System.out.println("#CC# buildTorrent ID:15");
                 if (BigInteger.ONE.equals(infoMap.get(PRIVATE_KEY).getValue())) {
+                	System.out.println("#CC# buildTorrent ID:16");
                     torrent.setPrivate(true);
                     isPrivate = true;
+                } else {
+                	System.out.println("#CC# buildTorrent ID:17");
                 }
+            } else {
+            	System.out.println("#CC# buildTorrent ID:18");
             }
 
             if (root.get(CREATION_DATE_KEY) != null) {
+            	System.out.println("#CC# buildTorrent ID:19");
                 BigInteger epochMilli = (BigInteger) root.get(CREATION_DATE_KEY).getValue();
                 // TODO: some torrents contain bogus values here (like 101010101010), which causes an exception
                 torrent.setCreationDate(Instant.ofEpochMilli(epochMilli.intValueExact() * 1000L));
+            } else {
+            	System.out.println("#CC# buildTorrent ID:20");
             }
 
             if (root.get(CREATED_BY_KEY) != null) {
+            	System.out.println("#CC# buildTorrent ID:21");
                 byte[] createdBy = (byte[]) root.get(CREATED_BY_KEY).getValue();
                 torrent.setCreatedBy(new String(createdBy, defaultCharset));
+            } else {
+            	System.out.println("#CC# buildTorrent ID:22");
             }
 
             AnnounceKey announceKey = null;
             // TODO: support for private torrents with multiple trackers
             if (!isPrivate && root.containsKey(ANNOUNCE_LIST_KEY)) {
-
+            	System.out.println("#CC# buildTorrent ID:23");
                 List<List<String>> trackerUrls;
 
                 BEList announceList = (BEList) root.get(ANNOUNCE_LIST_KEY);
                 List<BEList> tierList = (List<BEList>) announceList.getValue();
                 trackerUrls = new ArrayList<>(tierList.size() + 1);
                 for (BEList tierElement : tierList) {
-
+                	System.out.println("#CC# buildTorrent ID:24");
                     List<String> tierTackerUrls;
 
                     List<BEString> trackerUrlList = (List<BEString>) tierElement.getValue();
@@ -246,22 +278,27 @@ public class MetadataService implements IMetadataService {
                     }
                     trackerUrls.add(tierTackerUrls);
                 }
-
                 announceKey = new AnnounceKey(trackerUrls);
 
             } else if (root.containsKey(ANNOUNCE_KEY)) {
+            	System.out.println("#CC# buildTorrent ID:25");
                 byte[] trackerUrl = (byte[]) root.get(ANNOUNCE_KEY).getValue();
                 announceKey = new AnnounceKey(new String(trackerUrl, defaultCharset));
             }
 
             if (announceKey != null) {
+            	System.out.println("#CC# buildTorrent ID:26");
                 torrent.setAnnounceKey(announceKey);
+            } else {
+            	System.out.println("#CC# buildTorrent ID:27");
             }
 
         } catch (Exception e) {
+        	System.out.println("#CC# buildTorrent ID:28");
             throw new BtException("Invalid metainfo format", e);
         }
 
+        cc.writeToFile("callFinished");
         return torrent;
     }
 }
