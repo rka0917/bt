@@ -108,47 +108,64 @@ public class GetLookupTask extends IteratingTask {
 
 	@Override
 	void callFinished(RPCCall c, MessageBase rsp) {
-		if(rsp.getType() != MessageBase.Type.RSP_MSG || rsp.getMethod() != MessageBase.Method.GET)
+		CodeCoverage cc = new CodeCoverage("GetLookupTask_callFinished");
+		if(rsp.getType() != MessageBase.Type.RSP_MSG || rsp.getMethod() != MessageBase.Method.GET) {
+			System.out.println("#CC# 1");
 			return;
-		
+		}
+		else System.out.println("#CC# 2");
 		GetResponse get = (GetResponse) rsp;
 		
 		KBucketEntry e = todo.acceptResponse(c);
 
-		if(e == null)
+		if(e == null) {
+			System.out.println("#CC# 3");
 			return;
+		}
+		else System.out.println("#CC# 4");
 		
 		StorageItem data = null;
 		
 		if(get.getRawValue() != null) {
 			Key k = GenericStorage.fingerprint(get.getPubkey(), salt, get.getRawValue());
+			System.out.println("#CC# 5");
 			
 			if(!k.equals(targetKey)) {
 				DHT.log("get response fingerprint mismatch " + rsp , LogLevel.Error);
+				System.out.println("#CC# 6");
 				return;
 			}
+			else System.out.println("#CC# 7");
 			
 			
 			
 			if(expectedSequence < 0 || get.getSequenceNumber() >= expectedSequence) {
 				data = new StorageItem(get, salt);
+				System.out.println("#CC# 8");
 				
 				if(data.mutable() && !data.validateSig()) {
 					DHT.log("signature mismatch", LogLevel.Error);
+					System.out.println("#CC# 9");
 					return;
 				}
+				else System.out.println("#CC# 10");
 			}
-			
+			else System.out.println("#CC# 11");
 		}
+		else System.out.println("#CC# 12");
 		
 		
 		if(data != null) {
+			System.out.println("#CC# 13");
 			final StorageItem newData = data;
 			StorageItem merged = result.updateAndGet(current -> current == null || newData.seq() > current.seq() ? newData  : current);
 			if(valueHandler != null && merged == newData) {
+				System.out.println("#CC# 14");
 				valueHandler.accept(merged);
 			}
+			else System.out.println("#CC# 15");
 		}
+		else System.out.println("#CC# 16");
 		
 		
 		
@@ -157,10 +174,13 @@ public class GetLookupTask extends IteratingTask {
 		todo.addCandidates(e, returnedNodes);
 		
 		if(get.getToken() != null) {
+			System.out.println("#CC# 17");
 			closest.insert(e);
 			tokens.put(e, get.getToken());
 		}
-
+		else System.out.println("#CC# 18");
+		
+		cc.writeToFile("callFinished");
 	}
 	
 	public Map<KBucketEntry, byte[]> getTokens() {
