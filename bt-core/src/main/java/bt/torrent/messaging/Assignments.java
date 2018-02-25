@@ -21,6 +21,8 @@ import bt.net.Peer;
 import bt.runtime.Config;
 import bt.torrent.BitfieldBasedStatistics;
 import bt.torrent.selector.PieceSelector;
+import core.CodeCoverage;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -171,67 +173,102 @@ public class Assignments {
      * @return Collection of peers that have interesting pieces and can be given an assignment
      */
     // TODO: select from seeders first
+    /**
+     * 
+     * Called by TorrentWorker. CreateSessionStage creates an instance of TorrentWorker. TorrentProcessFactory creates two instances of CreateSessionStage.
+     * ServiceModule "binds" a TorrentProcessFactory to ProcessFactory. BtRuntimeBuilder has an instance of ServiceModule and which is tested by BtRuntimeBuilderTest.
+     */
     public Set<Peer> update(Set<Peer> ready, Set<Peer> choking) {
-        Iterator<Integer> suggested = selector.getNextPieces(pieceStatistics).iterator();
+    	System.out.println("TEST UPDATE");
+    	CodeCoverage cc = new CodeCoverage("Assignments_update.txt");
+    	
+    	Iterator<Integer> suggested = selector.getNextPieces(pieceStatistics).iterator();
         if (LOGGER.isTraceEnabled()) {
             LOGGER.trace("Updating assignments. Piece selector has more pieces: {}, number of ready peers: {}, number of assigned peers: {}",
                     suggested.hasNext(), ready.size(), assignments.size());
+            System.out.println("#CC# 2");
         }
+        else System.out.println("#CC# 3");
         final Set<Peer> readyPeers = new HashSet<>(ready);
         while (suggested.hasNext() && readyPeers.size() > 0) {
             Integer piece = suggested.next();
-
+            System.out.println("#CC# 4");
             final Iterator<Peer> iter = readyPeers.iterator();
             while (iter.hasNext()) {
+            	System.out.println("#CC# 5");
                 Peer peer = iter.next();
                 Optional<Bitfield> peerBitfield = pieceStatistics.getPeerBitfield(peer);
                 if (!peerBitfield.isPresent()) {
                     iter.remove();
+                    System.out.println("#CC# 6");
                     continue;
                 }
+                else System.out.println("#CC# 7");
                 LinkedList<Integer> queue = peers.get(peer);
                 if (queue != null && queue.size() > MAX_ASSIGNED_PIECES_PER_PEER) {
                     iter.remove();
+                    System.out.println("#CC# 8");
                     continue;
                 }
+                else System.out.println("#CC# 9");
                 boolean hasPiece = peerBitfield.get().isVerified(piece);
                 if (hasPiece) {
+                	System.out.println("#CC# 10");
                     if (queue == null) {
+                    	System.out.println("#CC# 11");
                         queue = new LinkedList<>();
                         peers.put(peer, queue);
                     }
+                    else System.out.println("#CC# 12");
                     if (!queue.contains(piece)) {
+                    	System.out.println("#CC# 13");
                         queue.add(piece);
                         if (queue.size() > MAX_ASSIGNED_PIECES_PER_PEER) {
                             iter.remove();
+                            System.out.println("#CC# 14");
                         }
+                        else System.out.println("#CC# 15");
                         if (LOGGER.isTraceEnabled()) {
                             LOGGER.trace("Adding piece #{} to peer's queue: {}. Number of pieces in peer's queue: {}",
                                     piece, peer, queue.size());
+                            System.out.println("#CC# 16");
                         }
+                        else System.out.println("#CC# 17");
                     }
+                    else System.out.println("#CC# 18");
                 }
+                else System.out.println("#CC# 19");
             }
+            System.out.println("#CC# 28");
         }
+        System.out.println("#CC# 1");
 
         Iterator<Map.Entry<Peer, LinkedList<Integer>>> iter = peers.entrySet().iterator();
         while (iter.hasNext()) {
+        	System.out.println("#CC# 20");
             Map.Entry<Peer, LinkedList<Integer>> e = iter.next();
             Peer peer = e.getKey();
             LinkedList<Integer> pieces = e.getValue();
 
             if (!ready.contains(peer) || pieces.isEmpty()) {
                 iter.remove();
+                System.out.println("#CC# 21");
             }
+            else System.out.println("#CC# 22");
         }
+        System.out.println("#CC# 27");
 
         Set<Peer> result = new HashSet<>(peers.keySet());
         for (Peer peer : choking) {
+        	System.out.println("#CC# 23");
             if (hasInterestingPieces(peer)) {
                 result.add(peer);
+                System.out.println("#CC# 24");
             }
+            else System.out.println("#CC# 25");
         }
-
+        System.out.println("#CC# 26");
+        cc.writeToFile("update");
         return result;
     }
 
