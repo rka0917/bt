@@ -335,6 +335,7 @@ public class TorrentDumper implements Component {
 	final Runnable singleThreadedDumpStats = SerializedTaskExecutor.onceMore(this::dumpStats);
 	
 	void dumpStats() {
+		CodeCoverage cc = new CodeCoverage("TorrentDumper_dumpStats");
 		long now = System.currentTimeMillis();
 		
 		ByteBuffer buf = ByteBuffer.allocateDirect(MAX_STAT_FILE_SIZE);
@@ -343,39 +344,53 @@ public class TorrentDumper implements Component {
 		
 		for(Iterator<Entry<Key, FetchStats>> it = fromMessages.entrySet().iterator(); it.hasNext();){
 			Entry<Key, FetchStats> e = it.next();
+			System.out.println("#CC# 1");
 			
 			FetchStats toStore = e.getValue();
 			if(Files.exists(toStore.name(torrentDir, ".torrent"))) {
+				System.out.println("#CC# 2");
 				it.remove();
 				continue;
 			}
+			else System.out.println("#CC# 3");
 			
 			workSet.add(e);
 		}
+		System.out.println("#CC# 4");
 		
 		workSet.forEach((entry) -> {
 			
 			Key k = entry.getKey();
 			FetchStats toStore = entry.getValue();
 			
-			if(!fromMessages.remove(k, toStore))
+			if(!fromMessages.remove(k, toStore)) {
+				System.out.println("#CC# 5");
 				return;
-			
+			}
+			else System.out.println("#CC# 6");
 			try {
 				
 				Optional<Path> existing = Stream.of(toStore.statsName(statsDir, FetchStats.State.INITIAL), toStore.statsName(statsDir, FetchStats.State.FAILED), toStore.statsName(statsDir, FetchStats.State.PRIORITY)).filter(Files::isRegularFile).findFirst();
 
 				if(!existing.isPresent()) {
 					// only throttle IPs for new hashes we don't already know about and wouldn't try anyway
-					if(activeCount.get() > 50 && blocklist.putIfAbsent(toStore.recentSources.get(0).getAddress().getAddress(), now) != null)
+					System.out.println("#CC# 7");
+					if(activeCount.get() > 50 && blocklist.putIfAbsent(toStore.recentSources.get(0).getAddress().getAddress(), now) != null) {
+						System.out.println("#CC# 8");
 						return;
+					}
+					else System.out.println("#CC# 9");
 				}
-				
+				else System.out.println("#CC# 10");
 				if(existing.isPresent()) {
+					System.out.println("#CC# 11");
 					Path p = existing.get();
 					try(FileChannel ch = FileChannel.open(p, StandardOpenOption.READ)) {
 						buf.clear();
-						while(ch.read(buf) != -1);
+						while(ch.read(buf) != -1) {
+							System.out.println("#CC# 12");
+						};
+						System.out.println("#CC# 13");
 						buf.flip();
 						FetchStats old = FetchStats.fromBencoded(new BDecoder().decode(buf));
 						
@@ -384,24 +399,35 @@ public class TorrentDumper implements Component {
 						Collection<InetAddress> newAddrs = toStore.recentSources.stream().map(e -> e.getAddress().getAddress()).collect(Collectors.toList());
 						
 						// avoid double-taps promoting things to the priority list
-						if(oldAddrs.containsAll(newAddrs) && old.state == FetchStats.State.INITIAL)
+						if(oldAddrs.containsAll(newAddrs) && old.state == FetchStats.State.INITIAL) {
+							System.out.println("#CC# 14");
 							return;
+						}
+						else System.out.println("#CC# 15");
 						
 						toStore.merge(old);
 						
-						if(old.state != FetchStats.State.INITIAL)
+						if(old.state != FetchStats.State.INITIAL) {
 							toStore.state = old.state;
+							System.out.println("#CC# 16");
+						}
 						
 					} catch (IOException e) {
 						log(e);
+						System.out.println("#CC# 17");
 					}
 				}
 				
 				if(toStore.state == State.INITIAL && toStore.insertCount > 1) {
+					System.out.println("#CC# 18");
 					toStore.state = State.PRIORITY;
-					if(existing.isPresent())
+					if(existing.isPresent()) {
+						System.out.println("#CC# 19");
 						Files.deleteIfExists(existing.get());
+					}
+					else System.out.println("#CC# 20");
 				}
+				else System.out.println("#CC# 21");
 					
 				
 				Path statsFile = toStore.statsName(statsDir, null);
@@ -411,25 +437,30 @@ public class TorrentDumper implements Component {
 				try(FileChannel ch = FileChannel.open(tempFile, StandardOpenOption.WRITE)) {
 					buf.clear();
 					new BEncoder().encodeInto(toStore.forBencoding(), buf);
-					while(buf.hasRemaining())
+					while(buf.hasRemaining()) {
+						System.out.println("#CC# 22");
 						ch.write(buf);
+					}
+					System.out.println("#CC# 23");
 					ch.close();
 					Files.createDirectories(statsFile.getParent());
 					Files.move(tempFile, statsFile, StandardCopyOption.ATOMIC_MOVE);
 				} catch(Exception ex) {
 					Files.deleteIfExists(tempFile);
+					System.out.println("#CC# 24");
 					throw ex;
 				}
 
 				
 			} catch (Exception e) {
 				log(e);
+				System.out.println("#CC# 25");
 			}
 			
 			
 			
 		});
-		
+		cc.writeToFile("dumpStats");
 		quota.set(QUOTA);
 	}
 	
