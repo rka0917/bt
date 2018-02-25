@@ -98,85 +98,90 @@ public class ByteChannelReader {
         int read;
         long timeoutMillis = getTimeoutMillis();
         long waitBetweenReadsMillis = getWaitBetweenReadsMillis();
+        boolean visited = false;
         do {
+        	if(visited) {
+        		System.out.println("#CC# Sync ID:3");
+        	}
+        	visited = true;
             read = channel.read(buf);
             if (read < 0) {
             	//TODO Add logging
-            	System.out.println("#CC# Sync ID:3");
+            	System.out.println("#CC# Sync ID:4");
             	cc.writeToFile("callFinished");
                 throw new RuntimeException("Received EOF, total bytes read: " + readTotal + ", expected: " + min + ".." + limit);
             } else if (read > 0) {
             	//TODO Add logging
-            	System.out.println("#CC# Sync ID:4");
+            	System.out.println("#CC# Sync ID:5");
                 readTotal += read;
                 if (readTotal > limit) {
                 	//TODO Add logging
-                	System.out.println("#CC# Sync ID:5");
+                	System.out.println("#CC# Sync ID:6");
                 	cc.writeToFile("callFinished");
                     throw new IllegalStateException("More than " + limit + " bytes received: " + readTotal);
                 } else {
                 	//TODO Add logging
-                	System.out.println("#CC# Sync ID:6");
+                	System.out.println("#CC# Sync ID:7");
                 }
                 if (!found) {
                 	//TODO Add logging
-                	System.out.println("#CC# Sync ID:7");
+                	System.out.println("#CC# Sync ID:8");
                     int pos = buf.position();
                     buf.flip();
                     buf.position(searchpos);
                     if (buf.remaining() >= syncToken.length) {
                     	//TODO Add logging
-                    	System.out.println("#CC# Sync ID:8");
+                    	System.out.println("#CC# Sync ID:9");
                         if (Buffers.searchPattern(buf, syncToken)) {
                         	//TODO Add logging
-                        	System.out.println("#CC# Sync ID:9");
+                        	System.out.println("#CC# Sync ID:10");
                             found = true;
                             matchpos = buf.position();
                         } else {
                         	//TODO Add logging
-                        	System.out.println("#CC# Sync ID:10");
+                        	System.out.println("#CC# Sync ID:11");
                             searchpos = pos - syncToken.length + 1;
                         }
                     } else {
                     	//TODO Add logging
-                    	System.out.println("#CC# Sync ID:11");
+                    	System.out.println("#CC# Sync ID:12");
                     }
                     buf.limit(origlim);
                     buf.position(pos);
                 } else {
                 	//TODO Add logging
-                	System.out.println("#CC# Sync ID:12");
+                	System.out.println("#CC# Sync ID:13");
                 }
             }
             if (found && min > 0 && readTotal >= min) {
             	//TODO Add logging
-            	System.out.println("#CC# Sync ID:13");
+            	System.out.println("#CC# Sync ID:14");
                 break;
             }
             if (waitBetweenReadsMillis > 0) {
             	//TODO Add logging
-            	System.out.println("#CC# Sync ID:14");
+            	System.out.println("#CC# Sync ID:15");
                 try {
                 	//TODO Add logging
-                	System.out.println("#CC# Sync ID:15");
+                	System.out.println("#CC# Sync ID:16");
                     Thread.sleep(waitBetweenReadsMillis);
                 } catch (InterruptedException e) {
                 	//TODO Add logging
-                	System.out.println("#CC# Sync ID:16");
+                	System.out.println("#CC# Sync ID:17");
                 	cc.writeToFile("callFinished");
                     throw new RuntimeException("Interrupted while waiting for data", e);
                 }
             }
         } while (timeoutMillis == 0 || (System.currentTimeMillis() - t1 <= timeoutMillis));
-        System.out.println("#CC# Sync ID:17");
+        System.out.println("#CC# Sync ID:18");
         if (readTotal < min) {
         	//TODO Add logging
-        	System.out.println("#CC# Sync ID:18");
+        	System.out.println("#CC# Sync ID:19");
         	cc.writeToFile("callFinished");
             throw new IllegalStateException("Less than " + min + " bytes received: " + readTotal);
         } else if (!found) {
         	//TODO Add logging
-        	System.out.println("#CC# Sync ID:19");
+        	System.out.println("#CC# Sync ID:20");
         	cc.writeToFile("callFinished");
             throw new IllegalStateException("Failed to synchronize: expected " + min + ".." + limit + ", received " + readTotal);
         }
