@@ -86,15 +86,19 @@ public class Assignments {
     }
 
     public Optional<Assignment> assign(Peer peer) {
+    	CodeCoverage cc = new CodeCoverage("Assignments_assign.txt");
         LinkedList<Integer> pieces = peers.get(peer);
         if (pieces == null || pieces.isEmpty()) {
+        	System.out.println("#CC# 1");
             return Optional.empty();
         }
+        else System.out.println("#CC# 2");
 
         boolean endgame = isEndgame();
 
         StringBuilder buf = LOGGER.isTraceEnabled() ? new StringBuilder() : null;
         if (LOGGER.isTraceEnabled()) {
+        	System.out.println("#CC# 3");
             buf.append("Trying to claim next assignment for peer ");
             buf.append(peer);
             buf.append(". Number of remaining pieces: ");
@@ -104,50 +108,74 @@ public class Assignments {
             buf.append(", endgame: " + endgame);
             buf.append(". ");
         }
+        else System.out.println("#CC# 4");
 
         Optional<Integer> selectedPiece;
         if (endgame) {
+        	System.out.println("#CC# 5");
             // take random piece to minimize number of pieces
             // requested from different peers at the same time
             Integer pieceIndex = pieces.remove(random.nextInt(pieces.size()));
             selectedPiece = Optional.of(pieceIndex);
         } else {
+        	System.out.println("#CC# 6");
 
             Integer piece;
             boolean assigned = true;
             Iterator<Integer> iter = pieces.iterator();
+            int runMoreThanOnce = 0; //Added by us in group23.
             do {
+            	runMoreThanOnce++; //Added by us in group23.
                 piece = iter.next();
                 if (bitfield.isComplete(piece)) {
+                	System.out.println("#CC# 10");
                     iter.remove();
                     if (LOGGER.isTraceEnabled()) {
                         buf.append("Checking next piece in queue: {" + piece + "}; piece is completed. ");
+                        System.out.println("#CC# 11");
                     }
+                    else System.out.println("#CC# 12");
                     continue;
                 }
+                else System.out.println("#CC# 13");
                 assigned = assignedPieces.contains(piece);
                 if (assigned && LOGGER.isTraceEnabled()) {
                     buf.append("Checking next piece in queue: {" + piece + "}; piece is assigned. ");
+                    System.out.println("#CC# 14");
                 }
+                else System.out.println("#CC# 15");
             } while (assigned && iter.hasNext());
-
+            if(runMoreThanOnce > 1) System.out.println("#CC# 8");//Added by us in group23.
+            else System.out.println("#CC# 7");
+            System.out.println("#CC# 9");
+            
             if (!assigned) {
+            	System.out.println("#CC# 16");
                 iter.remove();
             }
+            else System.out.println("#CC# 17");
             selectedPiece = assigned ? Optional.empty() : Optional.of(piece);
+            
+            if(assigned) System.out.println("#CC# 18");//Added by us in group23.
+            else System.out.println("#CC# 19");
         }
 
         if (LOGGER.isTraceEnabled()) {
+        	System.out.println("#CC# 20");
             if (selectedPiece.isPresent()) {
+            	System.out.println("#CC# 21");
                 buf.append(" => Assigning piece #");
                 buf.append(selectedPiece.get());
                 buf.append(" to current peer");
             } else {
+            	System.out.println("#CC# 22");
                 buf.append(" => No pieces to assign.");
             }
             LOGGER.trace(buf.toString());
         }
-
+        else System.out.println("#CC# 23");
+        
+        cc.writeToFile("assign");
         return selectedPiece.isPresent() ? Optional.of(assign(peer, selectedPiece.get())) : Optional.empty();
     }
 
