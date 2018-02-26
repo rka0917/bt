@@ -311,7 +311,7 @@ public class MSEHandshakeProcessor {
     }
 
     public Optional<MSECipher> negotiateIncoming(Peer peer, ByteChannel channel, ByteBuffer in, ByteBuffer out) throws IOException {
-    	CodeCoverage cc = new CodeCoverage("MSEHandshakeProcessor_negotiateIncoming");
+    	CodeCoverage cc = new CodeCoverage("MSEHandshakeProcessor_negotiateIncoming.txt");
         if (mseDisabled) {
         	System.out.println("#CC# negotiateIncoming 1");
         	cc.writeToFile("negotiateIncoming");
