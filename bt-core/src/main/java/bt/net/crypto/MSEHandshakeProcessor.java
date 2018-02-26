@@ -30,6 +30,8 @@ import bt.protocol.handler.MessageHandler;
 import bt.runtime.Config;
 import bt.torrent.TorrentDescriptor;
 import bt.torrent.TorrentRegistry;
+import core.CodeCoverage;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -119,13 +121,19 @@ public class MSEHandshakeProcessor {
     }
 
     public Optional<MSECipher> negotiateOutgoing(Peer peer, ByteChannel channel, TorrentId torrentId, ByteBuffer in, ByteBuffer out) throws IOException {
+    	CodeCoverage cc = new CodeCoverage("MSEHandshakeProcessor_negotiateOutgoing.txt");
         if (mseDisabled) {
+        	System.out.println("#CC# negotiateOutgoing 1");
+        	cc.writeToFile("negotiateOutgoing");
             return Optional.empty();
         }
+        else System.out.println("#CC# negotiateOutgoing 2");
 
         if (LOGGER.isTraceEnabled()) {
             LOGGER.trace("Negotiating encryption for outgoing connection: {}", peer);
+            System.out.println("#CC# negotiateOutgoing 3");
         }
+        else System.out.println("#CC# negotiateOutgoing 4");
         /**
          * Blocking steps:
          *
@@ -210,6 +218,8 @@ public class MSEHandshakeProcessor {
             try {
                 encryptedVC = throwawayCipher.getDecryptionCipher().doFinal(VC_RAW_BYTES);
             } catch (Exception e) {
+            	System.out.println("#CC# negotiateOutgoing 5");
+            	cc.writeToFile("negotiateOutgoing");
                 throw new RuntimeException("Failed to encrypt VC", e);
             }
         }
@@ -241,6 +251,7 @@ public class MSEHandshakeProcessor {
 
         // we may still need to receive some handshake data (e.g. padding), that is arriving later than expected
         if (in.remaining() < (phase2Min - encryptedVC.length)) {
+        	System.out.println("#CC# negotiateOutgoing 6");
             int lim = in.limit();
             in.limit(in.capacity());
             int read = encryptedReader.readAtLeast(phase2Min - encryptedVC.length)
@@ -249,23 +260,28 @@ public class MSEHandshakeProcessor {
             in.position(matchpos);
             in.limit(lim + read);
         }
+        else System.out.println("#CC# negotiateOutgoing 7");
 
         byte[] crypto_select = new byte[4];
         in.get(crypto_select);
         EncryptionPolicy negotiatedEncryptionPolicy = selectPolicy(crypto_select, localEncryptionPolicy);
         if (LOGGER.isTraceEnabled()) {
             LOGGER.trace("Negotiated encryption policy: {}, peer: {}", negotiatedEncryptionPolicy, peer);
+            System.out.println("#CC# negotiateOutgoing 8");
         }
+        else System.out.println("#CC# negotiateOutgoing 9"); 
 
         int theirPadding = in.getShort() & 0xFFFF;
         int missing = (theirPadding - in.remaining());
         if (missing > 0) {
+        	System.out.println("#CC# negotiateOutgoing 10");
             int pos = in.position();
             in.limit(in.capacity());
             encryptedReader.readAtLeast(missing).read(in);
             in.flip();
             in.position(pos);
         }
+        else System.out.println("#CC# negotiateOutgoing 11");
 
         // account for the upper layer protocol data that has already arrived
         in.position(in.position() + theirPadding);
@@ -276,13 +292,19 @@ public class MSEHandshakeProcessor {
         switch (negotiatedEncryptionPolicy) {
             case REQUIRE_PLAINTEXT:
             case PREFER_PLAINTEXT: {
+            	System.out.println("#CC# negotiateOutgoing 12");
+            	cc.writeToFile("negotiateOutgoing");
                 return Optional.empty();
             }
             case PREFER_ENCRYPTED:
             case REQUIRE_ENCRYPTED: {
+            	System.out.println("#CC# negotiateOutgoing 13");
+            	cc.writeToFile("negotiateOutgoing");
                 return Optional.of(cipher);
             }
             default: {
+            	System.out.println("#CC# negotiateOutgoing 14");
+            	cc.writeToFile("negotiateOutgoing");
                 throw new IllegalStateException("Unknown encryption policy: " + negotiatedEncryptionPolicy.name());
             }
         }
