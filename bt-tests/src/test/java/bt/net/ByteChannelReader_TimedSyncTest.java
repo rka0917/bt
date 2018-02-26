@@ -57,6 +57,27 @@ public class ByteChannelReader_TimedSyncTest {
         }, "Failed to synchronize: expected 50..50, received 50");
         assertEquals(50, buf.position());
     }
+    
+    @Test
+    public void testReader_noSyncToken() throws IOException {
+    	//Contract: sync() method should return an exception if 
+    	//there aren't any syncTokens 
+        ReadByBlockChannel channel = createChannelWithTestData();
+        int[] limits = new int[] {10, 20, 30, 40, 50};
+        LimitingChannel limitedChannel = new LimitingChannel(channel, limits);
+        ByteChannelReader reader = testReader(limitedChannel);
+        ByteBuffer buf = ByteBuffer.allocate(100);
+        byte[] pattern = new byte[0];
+
+        assertExceptionWithMessage(it -> {
+            try {
+                return reader.readExactly(50).sync(buf, pattern);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }, "Empty synchronization token");
+        assertEquals(0, buf.position());
+    }
 
     @Test
     public void testReader_timedSync_NoMatch_ExactAmount_Unlimited() throws IOException {
@@ -74,6 +95,28 @@ public class ByteChannelReader_TimedSyncTest {
         byte[] pattern = new byte[]{-1};
 
         int read = reader.readExactly(301).sync(buf, pattern);
+        assertEquals(301, read);
+        assertEquals(buf.limit(), buf.position());
+    }
+    
+    @Test
+    public void testReader_timedSync_NoMatch_ExactAmount_Unlimited_waitBetweenReads() throws IOException {
+    	//Contract: Sync() should be able to read the data with a delay between each read if the total time
+    	//doesn't exceed the set timeout time
+        byte[] part0 = new byte[100];
+        byte[] part1 = new byte[100];
+        byte[] part2 = new byte[100];
+        byte[] part3 = new byte[]{-1};
+
+        List<byte[]> data = new ArrayList<>(Arrays.asList(part0, part1, part2, part3));
+        ReadByBlockChannel channel = new ReadByBlockChannel(data);
+        int[] limits = new int[] {300, 300, 300, 301};
+        LimitingChannel limitedChannel = new LimitingChannel(channel, limits);
+        ByteChannelReader reader = testReader(limitedChannel);
+        ByteBuffer buf = ByteBuffer.allocate(301);
+        byte[] pattern = new byte[]{-1};
+
+        int read = reader.readExactly(301).waitBetweenReads(Duration.ofMillis(100)).withTimeout(Duration.ofMillis(1000)).sync(buf, pattern);
         assertEquals(301, read);
         assertEquals(buf.limit(), buf.position());
     }
