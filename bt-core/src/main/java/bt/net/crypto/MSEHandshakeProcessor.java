@@ -311,13 +311,18 @@ public class MSEHandshakeProcessor {
     }
 
     public Optional<MSECipher> negotiateIncoming(Peer peer, ByteChannel channel, ByteBuffer in, ByteBuffer out) throws IOException {
+    	CodeCoverage cc = new CodeCoverage("MSEHandshakeProcessor_negotiateIncoming");
         if (mseDisabled) {
+        	System.out.println("#CC# negotiateIncoming 1");
+        	cc.writeToFile("negotiateIncoming");
             return Optional.empty();
         }
 
         if (LOGGER.isTraceEnabled()) {
             LOGGER.trace("Negotiating encryption for incoming connection: {}", peer);
+            System.out.println("#CC# negotiateIncoming 2");
         }
+        else System.out.println("#CC# negotiateIncoming 3");
         /**
          * Blocking steps:
          *
@@ -350,13 +355,18 @@ public class MSEHandshakeProcessor {
              consumed = protocol.decode(context, in);
         } catch (Exception e) {
             // ignore
+        	System.out.println("#CC# negotiateIncoming 4");
+        	cc.writeToFile("negotiateIncoming");
         }
         // TODO: can this be done without knowing the protocol specifics? (KeepAlive can be especially misleading: 0x00 0x00 0x00 0x00)
         if (consumed > 0 && context.getMessage() instanceof Handshake) {
             // decoding was successful, can use plaintext (if supported)
             assertPolicyIsCompatible(EncryptionPolicy.REQUIRE_PLAINTEXT);
+            System.out.println("#CC# negotiateIncoming 5");
+            cc.writeToFile("negotiateIncoming");
             return Optional.empty();
         }
+        else System.out.println("#CC# negotiateIncoming 6");
 
         int phase1Min = keyGenerator.getPublicKeySize();
         int phase1Limit = phase1Min + paddingMaxLength;
@@ -365,9 +375,11 @@ public class MSEHandshakeProcessor {
         // verify that there is a sufficient amount of bytes to decode peer's public key
         int phase1Read;
         if (phase0Read < phase1Min) {
+        	System.out.println("#CC# negotiateIncoming 7");
             phase1Read = reader.readAtLeast(phase1Min - phase0Read).readNoMoreThan(phase1Limit - phase0Read).read(in);
         } else {
             phase1Read = 0;
+            System.out.println("#CC# negotiateIncoming 8");
         }
 
         in.flip();
@@ -410,23 +422,33 @@ public class MSEHandshakeProcessor {
         digest.update(BigIntegers.encodeUnsigned(S, keyGenerator.getPublicKeySize()));
         byte[] b2 = digest.digest();
         for (TorrentId torrentId : torrentRegistry.getTorrentIds()) {
+        	System.out.println("#CC# negotiateIncoming 9");
             digest.update("req2".getBytes("ASCII"));
             digest.update(torrentId.getBytes());
             byte[] b1 = digest.digest();
             if (Arrays.equals(xor(b1, b2), bytes)) {
+            	System.out.println("#CC# negotiateIncoming 10");
                 requestedTorrent = torrentId;
                 break;
             }
+            else System.out.println("#CC# negotiateIncoming 11");
         }
+        System.out.println("#CC# negotiateIncoming 12");
         // check that torrent is supported and active
         if (requestedTorrent == null) {
+        	System.out.println("#CC# negotiateIncoming 13");
+        	cc.writeToFile("negotiateIncoming");
             throw new IllegalStateException("Unsupported torrent requested");
         } else {
+        	System.out.println("#CC# negotiateIncoming 14");
             Optional<TorrentDescriptor> descriptor = torrentRegistry.getDescriptor(requestedTorrent);
             if (descriptor.isPresent() && !descriptor.get().isActive()) {
+            	System.out.println("#CC# negotiateIncoming 15");
+            	cc.writeToFile("negotiateIncoming");
                 // don't throw an exception if descriptor is not present -- torrent might be being fetched at the time
                 throw new IllegalStateException("Inactive torrent requested: " + requestedTorrent);
             }
+            else System.out.println("#CC# negotiateIncoming 16");
         }
 
         byte[] Sbytes = BigIntegers.encodeUnsigned(S, MSEKeyPairGenerator.PUBLIC_KEY_BYTES);
@@ -443,6 +465,8 @@ public class MSEHandshakeProcessor {
         try {
             in.put(cipher.getDecryptionCipher().update(leftovers));
         } catch (Exception e) {
+        	System.out.println("#CC# negotiateIncoming 17");
+        	cc.writeToFile("negotiateIncoming");
             throw new RuntimeException("Failed to decrypt leftover bytes: " + leftovers.length);
         }
         in.position(pos);
@@ -450,30 +474,39 @@ public class MSEHandshakeProcessor {
         byte[] theirVC = new byte[8];
         in.get(theirVC);
         if (!Arrays.equals(VC_RAW_BYTES, theirVC)) {
+        	System.out.println("#CC# negotiateIncoming 18");
+        	cc.writeToFile("negotiateIncoming");
             throw new IllegalStateException("Invalid VC: "+ Arrays.toString(theirVC));
         }
+        else System.out.println("#CC# negotiateIncoming 19");
 
         byte[] crypto_provide = new byte[4];
         in.get(crypto_provide);
         EncryptionPolicy negotiatedEncryptionPolicy = selectPolicy(crypto_provide, localEncryptionPolicy);
         if (LOGGER.isTraceEnabled()) {
             LOGGER.trace("Negotiated encryption policy: {}, peer: {}", negotiatedEncryptionPolicy, peer);
+            System.out.println("#CC# negotiateIncoming 20");
         }
 
         int theirPadding = in.getShort() & 0xFFFF;
         if (theirPadding > 512) {
             // sanity check
+        	System.out.println("#CC# negotiateIncoming 21");
+        	cc.writeToFile("negotiateIncoming");
             throw new IllegalStateException("Padding is too long: " + theirPadding);
         }
+        else System.out.println("#CC# negotiateIncoming 22");
         int position = in.position(); // mark
         // check if the whole padding block has already arrived
         if (in.remaining() < theirPadding) {
+        	System.out.println("#CC# negotiateIncoming 23");
             in.limit(in.capacity());
             in.position(phase1Read + phase2Read);
             encryptedReader.readAtLeast(theirPadding - in.remaining() + 2/*IA length*/).read(in);
             in.flip();
             in.position(position); // reset
         }
+        else System.out.println("#CC# negotiateIncoming 24");
 
         in.position(position + theirPadding); // discard padding
         // Initial Payload length (0..65535 bytes)
@@ -495,13 +528,19 @@ public class MSEHandshakeProcessor {
         switch (negotiatedEncryptionPolicy) {
             case REQUIRE_PLAINTEXT:
             case PREFER_PLAINTEXT: {
+            	System.out.println("#CC# negotiateIncoming 25");
+            	cc.writeToFile("negotiateIncoming");
                 return Optional.empty();
             }
             case PREFER_ENCRYPTED:
             case REQUIRE_ENCRYPTED: {
+            	System.out.println("#CC# negotiateIncoming 26");
+            	cc.writeToFile("negotiateIncoming");
                 return Optional.of(cipher);
             }
             default: {
+            	System.out.println("#CC# negotiateIncoming 27");
+            	cc.writeToFile("negotiateIncoming");
                 throw new IllegalStateException("Unknown encryption policy: " + negotiatedEncryptionPolicy.name());
             }
         }
