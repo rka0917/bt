@@ -45,6 +45,7 @@ import bt.torrent.TorrentDescriptor;
 import bt.torrent.TorrentRegistry;
 
 import java.security.MessageDigest;
+import static bt.TestUtil.assertExceptionWithMessage;
 
 public class MSEHandshakeProcessorTest {
 
@@ -260,6 +261,117 @@ public class MSEHandshakeProcessorTest {
 			// Should return Optional.empty()
 			Optional<MSECipher> result = processor.negotiateIncoming(null, new FakeChannel(), in, out);
 			assertEquals(Optional.empty(), result);
+		} catch (Exception e) {
+			e.printStackTrace();
+			assertTrue(false);
+		}
+		
+	}
+	
+	@Test 
+	public void test_negotiateIncoming_InvalidVC() {
+		//Contract: if the incoming VC is invalid, an exception should be thrown
+		
+		//Fake MsgHandler class
+		class MsgHandler implements MessageHandler<Message> {
+			@Override public Collection<Class<? extends Message>> getSupportedTypes() { return null; }
+			@Override public Class<? extends Message> readMessageType(ByteBuffer buffer) { return null; }
+			@Override public boolean encode(EncodingContext context, Message message, ByteBuffer buffer) { return false; }
+			
+			@Override
+			public int decode(DecodingContext context, ByteBuffer buffer) {
+				// The message should be of type Handshake
+				context.setMessage(new Handshake(null, null, null));
+				// Consumed should be of greater than 0
+				return 0;
+				}
+			}
+		
+		// Fake class for testing
+		class FakeChannel implements ByteChannel {
+			boolean response = false;
+			
+			@Override public int read(ByteBuffer dst) throws IOException {
+				if(response) {
+					try {
+						MessageDigest digest = MessageDigest.getInstance("SHA-1");
+						 digest.update("req1".getBytes("ASCII"));
+					     digest.update(BigIntegers.encodeUnsigned(new BigInteger("0"), 96));
+					     dst.put(digest.digest());
+					     digest.update("req3".getBytes("ASCII"));
+					     digest.update(BigIntegers.encodeUnsigned(new BigInteger("0"), 96));
+					     byte[] b2 = digest.digest();
+					     digest.update("req2".getBytes("ASCII"));
+					     byte[] bytes = new byte[20];
+							for(int i = 0; i < 20; i++) {
+								bytes[i] = 0;
+							}
+				         digest.update(bytes);
+				         byte[] b1 = digest.digest();
+				         dst.put(xor(b1, b2));
+				         byte[] vc = new byte[8];
+
+				         dst.put(vc);
+				         //crypto provide
+				         dst.put((byte)0);
+				         dst.put((byte)0);
+				         dst.put((byte)1);
+				         dst.put((byte)1);
+				         //padding
+				         dst.put((byte)(0xd1));
+				         dst.put((byte)(0x93));
+	
+	
+					}catch(Exception e) {
+						 throw new RuntimeException(e);
+					}
+				}
+			// Must read at least 20 bytes
+			return 96;
+			}
+			@Override public void close() throws IOException { }
+			@Override public boolean isOpen() { return false; }
+			@Override public int write(ByteBuffer arg0) throws IOException { 
+				response = true;
+				arg0.position(arg0.limit());
+				return 1; 
+			}
+			private byte[] xor(byte[] b1, byte[] b2) {
+		        if (b1.length != b2.length) {
+		            throw new IllegalStateException("Lengths do not match: " + b1.length + ", " + b2.length);
+		        }
+		        byte[] result = new byte[b1.length];
+		        for (int i = 0; i < b1.length; i++) {
+		            result[i] = (byte) (b1[i] ^ b2[i]);
+		        }
+		        return result;
+		    }
+	}
+		
+		
+		// Key must be at least 16 bytes
+		Config config = new Config();
+		config.setMsePrivateKeySize(16);
+		config.setEncryptionPolicy(EncryptionPolicy.PREFER_PLAINTEXT);
+
+		// Instantiate a new processor with the correct values to bypass checks
+		MSEHandshakeProcessor processor = new MSEHandshakeProcessor(new FakeTorrent(), new MsgHandler(), config);
+
+		try {
+			// Buffer must have at least 96 bytes of space
+			ByteBuffer in = ByteBuffer.allocate(100);
+			ByteBuffer out = ByteBuffer.allocate(1000);
+			
+			assertExceptionWithMessage(it -> 
+				{
+					try {
+						return processor.negotiateIncoming(null, new FakeChannel(), in, out);
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+					return it;
+				}
+			, "Invalid VC: [-31, 118, -93, 13, -110, -114, -11, -37]");
 		} catch (Exception e) {
 			e.printStackTrace();
 			assertTrue(false);
