@@ -28,8 +28,14 @@ import bt.torrent.selector.PieceSelector;
 public class AssignmentsTest {
 	
 	@Test
-	public void testAssign() {
-		
+	public void testAssign_EmptyPeers() {
+		// Contract: If a peer does not have any pieces then return empty.
+		Peer p = new PeerFake();
+		Bitfield bfLocal = new Bitfield(1);
+		BitfieldBasedStatistics bbs = new BitfieldBasedStatistics(bfLocal);
+		PieceSelector ps = new PieceSelectorFake();
+		Assignments as = new Assignments(bfLocal,null,bbs,new Config());
+		assertEquals(Optional.empty(),as.assign(p));
 	}
 	
 	@Test
