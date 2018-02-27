@@ -89,17 +89,17 @@ public class Assignments {
     	CodeCoverage cc = new CodeCoverage("Assignments_assign.txt");
         LinkedList<Integer> pieces = peers.get(peer);
         if (pieces == null || pieces.isEmpty()) {
-        	System.out.println("#CC# 1");
+        	System.out.println("#CC# assign 1");
         	cc.writeToFile("assign");
             return Optional.empty();
         }
-        else System.out.println("#CC# 2");
+        else System.out.println("#CC# assign 2");
 
         boolean endgame = isEndgame();
 
         StringBuilder buf = LOGGER.isTraceEnabled() ? new StringBuilder() : null;
         if (LOGGER.isTraceEnabled()) {
-        	System.out.println("#CC# 3");
+        	System.out.println("#CC# assign 3");
             buf.append("Trying to claim next assignment for peer ");
             buf.append(peer);
             buf.append(". Number of remaining pieces: ");
@@ -109,17 +109,17 @@ public class Assignments {
             buf.append(", endgame: " + endgame);
             buf.append(". ");
         }
-        else System.out.println("#CC# 4");
+        else System.out.println("#CC# assign 4");
 
         Optional<Integer> selectedPiece;
         if (endgame) {
-        	System.out.println("#CC# 5");
+        	System.out.println("#CC# assign 5");
             // take random piece to minimize number of pieces
             // requested from different peers at the same time
             Integer pieceIndex = pieces.remove(random.nextInt(pieces.size()));
             selectedPiece = Optional.of(pieceIndex);
         } else {
-        	System.out.println("#CC# 6");
+        	System.out.println("#CC# assign 6");
 
             Integer piece;
             boolean assigned = true;
@@ -129,52 +129,52 @@ public class Assignments {
             	runMoreThanOnce++; //Added by us in group23.
                 piece = iter.next();
                 if (bitfield.isComplete(piece)) {
-                	System.out.println("#CC# 10");
+                	System.out.println("#CC# assign 10");
                     iter.remove();
                     if (LOGGER.isTraceEnabled()) {
                         buf.append("Checking next piece in queue: {" + piece + "}; piece is completed. ");
-                        System.out.println("#CC# 11");
+                        System.out.println("#CC# assign 11");
                     }
-                    else System.out.println("#CC# 12");
+                    else System.out.println("#CC# assign 12");
                     continue;
                 }
-                else System.out.println("#CC# 13");
+                else System.out.println("#CC# assign 13");
                 assigned = assignedPieces.contains(piece);
                 if (assigned && LOGGER.isTraceEnabled()) {
                     buf.append("Checking next piece in queue: {" + piece + "}; piece is assigned. ");
-                    System.out.println("#CC# 14");
+                    System.out.println("#CC# assign 14");
                 }
-                else System.out.println("#CC# 15");
+                else System.out.println("#CC# assign 15");
             } while (assigned && iter.hasNext());
-            if(runMoreThanOnce > 1) System.out.println("#CC# 8");//Added by us in group23.
-            else System.out.println("#CC# 7");
-            System.out.println("#CC# 9");
+            if(runMoreThanOnce > 1) System.out.println("#CC# assign 8");//Added by us in group23.
+            else System.out.println("#CC# assign 7");
+            System.out.println("#CC# assign 9");
             
             if (!assigned) {
-            	System.out.println("#CC# 16");
+            	System.out.println("#CC# assign 16");
                 iter.remove();
             }
-            else System.out.println("#CC# 17");
+            else System.out.println("#CC# assign 17");
             selectedPiece = assigned ? Optional.empty() : Optional.of(piece);
             
-            if(assigned) System.out.println("#CC# 18");//Added by us in group23.
-            else System.out.println("#CC# 19");
+            if(assigned) System.out.println("#CC# assign 18");//Added by us in group23.
+            else System.out.println("#CC# assign 19");
         }
 
         if (LOGGER.isTraceEnabled()) {
-        	System.out.println("#CC# 20");
+        	System.out.println("#CC# assign 20");
             if (selectedPiece.isPresent()) {
-            	System.out.println("#CC# 21");
+            	System.out.println("#CC# assign 21");
                 buf.append(" => Assigning piece #");
                 buf.append(selectedPiece.get());
                 buf.append(" to current peer");
             } else {
-            	System.out.println("#CC# 22");
+            	System.out.println("#CC# assign 22");
                 buf.append(" => No pieces to assign.");
             }
             LOGGER.trace(buf.toString());
         }
-        else System.out.println("#CC# 23");
+        else System.out.println("#CC# assign 23");
         
         cc.writeToFile("assign");
         return selectedPiece.isPresent() ? Optional.of(assign(peer, selectedPiece.get())) : Optional.empty();
