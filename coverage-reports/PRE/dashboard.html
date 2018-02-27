@@ -1,0 +1,1164 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    
+    
+    <link rel="SHORTCUT ICON" href="img/clover.ico" />
+
+    <link rel="stylesheet" href="aui/css/aui.min.css" media="all"/>
+    <link rel="stylesheet" href="aui/css/aui-experimental.min.css" media="all"/>
+    <!--[if IE 9]><link rel="stylesheet" href="aui/css/aui-ie9.min.css" media="all"/><![endif]-->
+
+    <style type="text/css" media="all">
+        @import url('style.css');
+        @import url('tree.css');
+        
+    </style>
+
+    <script src="jquery-1.8.3.min.js" type="text/javascript"></script>
+    <script src="aui/js/aui.min.js" type="text/javascript"></script>
+    <script src="aui/js/aui-experimental.min.js" type="text/javascript"></script>
+    <script src="aui/js/aui-soy.min.js" type="text/javascript"></script>
+
+    <script src="package-nodes-tree.js" type="text/javascript"></script>
+    <script src="clover-tree.js" type="text/javascript"></script>
+    <script src="clover.js" type="text/javascript"></script>
+    <script src="clover-descriptions.js" type="text/javascript"></script>
+    <script src="cloud.js" type="text/javascript"></script>
+
+            <title>Coverage Report</title>
+    </head>
+
+<body onresize="processTreeMapDashJson(treeMapJson);" >
+    <div id="page">
+        
+        
+
+
+<header id="header" role="banner">
+    <nav class="aui-header aui-dropdown2-trigger-group" role="navigation">
+        <div class="aui-header-inner">
+            <div class="aui-header-primary">
+                <h1 id="logo" class="aui-header-logo aui-header-logo-clover">
+                    <a href="http://openclover.org" title="Visit OpenClover home page"><span class="aui-header-logo-device">OpenClover</span></a>
+                </h1>
+                            </div>
+            <div class="aui-header-secondary">
+                <ul class="aui-nav">
+                    <li id="system-help-menu">
+                        <a class="aui-nav-link" title="Open online documentation" target="_blank"
+                           href="http://openclover.org/documentation">
+                            <span class="aui-icon aui-icon-small aui-iconfont-help">&#160;Help</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+        
+        <div class="aui-page-panel">
+            <div class="aui-page-panel-inner">
+                <div class="aui-page-panel-nav aui-page-panel-nav-clover">
+                    
+
+<div class="aui-page-header-inner" style="margin-bottom: 20px;">
+    <div class="aui-page-header-image">
+                <div class="aui-avatar aui-avatar-large aui-avatar-project">
+            <div class="aui-avatar-inner">
+                                    <img src="img/clover_logo_large.png" alt="Clover icon"/>
+                            </div>
+        </div>
+            </div>
+    <div class="aui-page-header-main" >
+        <h1>
+                                        Coverage Report
+                                </h1>
+    </div>
+</div>
+
+<nav class="aui-navgroup aui-navgroup-vertical">
+    <div class="aui-navgroup-inner">
+                                            <ul class="aui-nav">
+                <li class="aui-nav-selected">
+                    <a href="dashboard.html">Project overview</a>
+                </li>
+            </ul>
+        
+                <div class="aui-nav-heading packages-nav-heading">
+            <strong>Packages</strong>
+        </div>
+        <div class="aui-nav project-packages">
+            <form method="get" action="#" class="aui package-filter-container">
+                <input type="text" autocomplete="off" class="package-filter text"
+                       placeholder="Type to filter packages..." name="package-filter" id="package-filter"
+                       title="Start typing package name (or part of the name) to search through the tree. Use arrow keys and the Enter key to navigate."/>
+            </form>
+            <p class="package-filter-no-results-message hidden">
+                <small>No results found.</small>
+            </p>
+                                                  <div class="packages-tree-wrapper" data-root-relative="" data-package-name="">
+                <div class="packages-tree-container"></div>
+                <div class="clover-packages-lozenges"></div>
+            </div>
+        </div>
+        
+            </div>
+</nav>                </div>
+                <section class="aui-page-panel-content">
+                    <div class="aui-page-panel-content-clover">
+
+                    
+                    <ol class="aui-nav aui-nav-breadcrumbs">
+            
+        <li><a href="dashboard.html">Project Clover database ti feb 27 2018 17:42:59 CET</a></li>
+    </ol>
+    
+<h1 class="aui-h2-clover">
+            Project overview
+    </h1>
+<div class="aui-tabs horizontal-tabs">
+        <ul class="tabs-menu">
+            <li class="menu-item active-tab">
+            <a href="dashboard.html">Dashboard</a>
+        </li>
+                <li class="menu-item ">
+            <a href="pkg-summary.html"><strong>Application code</strong></a>
+        </li>
+                <li class="menu-item ">
+            <a href="testsrc-pkg-summary.html"><strong>Test code</strong></a>
+        </li>
+        <li class="menu-item ">
+            <a href="test-pkg-summary.html"><strong>Test results</strong></a>
+        </li>
+                <li class="menu-item ">
+            <a href="top-risks.html"><strong>Top risks</strong></a>
+        </li>
+        <li class="menu-item ">
+            <a href="quick-wins.html"><strong>Quick wins</strong></a>
+        </li>
+                                                <li class="menu-item ">
+                <a href="treemap.html"><strong>Coverage tree map</strong></a>
+            </li>
+            </ul>
+    <div class="tabs-pane active-pane" id="tabs-first">
+
+        <div>&#160;</div>
+
+
+
+
+
+
+<div class="aui-group">
+    <div class="aui-item">
+        <div class="dashboard-widget">
+            <header class="dashboard-widget-header">
+                
+                <h3>
+                    Code coverage
+                    <small style="float:right; font-weight: normal">
+                        400 classes,
+                        1 064 /
+                        11 373 elements
+                    </small>
+                </h3>
+            </header>
+            <div class="dashboard-widget-content">
+                <div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.093554914</span>9,4%</div><div style="display: table-cell">
+ <div title="9,4% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:9.4%"></div></div></div></div>
+                <p><a href="pkg-summary.html">See more</a></p>
+            </div>
+        </div>
+
+        <div class="dashboard-widget">
+            <header class="dashboard-widget-header">
+                <h3>
+                    Test results
+                    <small style="float:right; font-weight: normal">
+                        233 /
+                        233 tests
+                        5,1 secs
+                    </small>
+                </h3>
+            </header>
+            <div class="dashboard-widget-content">
+                                    
+
+<div style="display: table; width: 100%">
+            <div class="barGraphValue"><span class="sortValue">1.0</span>100%</div>         <div style="display: table-cell">
+            
+            <div title="0% Errors" style="min-width: 40px;" class="testBarError">
+                <div title="100% of tests passed&lt;br/&gt;0% of tests failed" class="testBarFail" style="width: 100%"><div class="testBarPass" style="width: 100%"></div></div>
+            </div>
+        </div>
+    </div>                                <p><a href="test-pkg-summary.html">See more</a></p>
+            </div>
+        </div>
+
+        <div class="dashboard-widget">
+            <header class="dashboard-widget-header">
+                <h3>Code metrics</h3>
+            </header>
+                         
+
+<div id="$statsId" class="aui-item" style="display: ${display}">
+<div style="display: table">
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of branches in this project">Branches:</label></div>
+        <div class="stats-box-value">2 212</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of statements in this project">Statements:</label></div>
+        <div class="stats-box-value">7 260</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of methods in this project">Methods:</label></div>
+        <div class="stats-box-value">1 901</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of classes in this project">Classes:</label></div>
+        <div class="stats-box-value">400</div>
+    </div>
+            <div class="stats-box">
+            <div class="stats-box-label"><label title="Total number of files in this project">Files:</label></div>
+            <div class="stats-box-value">356</div>
+        </div>
+                <div class="stats-box">
+            <div class="stats-box-label"><label title="Total number of packages in this project">Packages:</label></div>
+            <div class="stats-box-value">41</div>
+        </div>
+        <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of lines of code in this project">LOC:</label></div>
+        <div class="stats-box-value">35 061</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of non-comment lines of code in this project">NCLOC:</label></div>
+        <div class="stats-box-value">18 997</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Cyclomatic complexity is the number of paths in this project">Total complexity:</label></div>
+        <div class="stats-box-value">3 400</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label">
+            <label title="Complexity density is the complexity divided by the number of statements in this project">Complexity density:</label>
+        </div>
+        <div class="stats-box-value">0,47</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Number of statements per method.">Statements/Method:</label></div>
+        <div class="stats-box-value">3,82</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Number of methods per class.">Methods/Class:</label></div>
+        <div class="stats-box-value">4,75</div>
+    </div>
+            <div class="stats-box">
+            <div class="stats-box-label"><label title="Number of classes per package.">Classes/Package:</label></div>
+            <div class="stats-box-value">9,76</div>
+        </div>
+        <div class="stats-box">
+        <div class="stats-box-label"><label title="Complexity divided by the number of methods in this project">Average method complexity:</label></div>
+        <div class="stats-box-value">1,79</div>
+    </div>
+</div>
+
+</div>        </div>
+
+                <div class="dashboard-widget">
+            <header class="dashboard-widget-header">
+                <h3>Class Coverage Distribution</h3>
+            </header>
+            <div class="dashboard-widget-content">
+                <div style="text-align: center">                     <img src="img/classDistrubutionChart.png" alt="img/classDistrubutionChart.png" usemap="#classDistrubutionChart.png"/>
+                </div>
+                <map id="classDistrubutionChart.png" name="classDistrubutionChart.png">
+<area shape="rect" coords="282,202,304,205" title="5 classes have 91-100% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="258,200,280,205" title="8 classes have 81-90% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="233,201,255,205" title="6 classes have 71-80% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="209,203,231,205" title="3 classes have 61-70% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="184,204,206,205" title="2 classes have 51-60% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="160,205,182,206" title="1 class has 41-50% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="111,204,133,205" title="2 classes have 21-30% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="62,204,84,205" title="2 classes have 1-10% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="38,15,60,205" title="270 classes have 0% coverage" alt="" nohref="nohref"/>
+</map>
+            </div>
+        </div>
+        
+                <div class="dashboard-widget">
+            <header class="dashboard-widget-header">
+                <h3>Class Complexity</h3>
+            </header>
+            <div class="dashboard-widget-content">
+                <div style="text-align: center">
+                    <img src="img/classComplexityChart.png" alt="img/classComplexityChart.png" usemap="#classComplexityChart.png"/>
+                </div>
+                <map id="classComplexityChart.png" name="classComplexityChart.png">
+<area shape="poly" coords="54,205,52,208,49,205,52,203,54,205,54,205" title="Complexity: 1; Coverage: 0%; Class: RequestMatcher" alt="" href="bt/test/protocol/RequestMatcher.html#RequestMatcher"/>
+<area shape="poly" coords="54,159,52,161,49,159,52,156,54,159,54,159" title="Complexity: 17; Coverage: 0%; Class: ProtocolTestBuilder" alt="" href="bt/test/protocol/ProtocolTestBuilder.html#ProtocolTestBuilder"/>
+<area shape="poly" coords="54,205,52,208,49,205,52,203,54,205,54,205" title="Complexity: 1; Coverage: 0%; Class: RequestMatcher" alt="" href="bt/test/protocol/RequestMatcher.html#RequestMatcher"/>
+<area shape="poly" coords="54,205,52,208,49,205,52,203,54,205,54,205" title="Complexity: 1; Coverage: 0%; Class: RequestMatcher" alt="" href="bt/test/protocol/RequestMatcher.html#RequestMatcher"/>
+<area shape="poly" coords="54,205,52,208,49,205,52,203,54,205,54,205" title="Complexity: 1; Coverage: 0%; Class: RequestMatcher" alt="" href="bt/test/protocol/RequestMatcher.html#RequestMatcher"/>
+<area shape="poly" coords="54,205,52,208,49,205,52,203,54,205,54,205" title="Complexity: 1; Coverage: 0%; Class: RequestMatcher" alt="" href="bt/test/protocol/RequestMatcher.html#RequestMatcher"/>
+<area shape="poly" coords="54,205,52,208,49,205,52,203,54,205,54,205" title="Complexity: 1; Coverage: 0%; Class: RequestMatcher" alt="" href="bt/test/protocol/RequestMatcher.html#RequestMatcher"/>
+<area shape="poly" coords="54,205,52,208,49,205,52,203,54,205,54,205" title="Complexity: 1; Coverage: 0%; Class: RequestMatcher" alt="" href="bt/test/protocol/RequestMatcher.html#RequestMatcher"/>
+<area shape="poly" coords="54,159,52,161,49,159,52,156,54,159,54,159" title="Complexity: 17; Coverage: 0%; Class: ProtocolTestBuilder" alt="" href="bt/test/protocol/ProtocolTestBuilder.html#ProtocolTestBuilder"/>
+<area shape="poly" coords="54,202,52,205,49,202,52,200,54,202,54,202" title="Complexity: 2; Coverage: 0%; Class: TestExecutorServiceProvider" alt="" href="bt/it/fixture/TestExecutorServiceProvider.html#TestExecutorServiceProvider"/>
+<area shape="poly" coords="54,205,52,208,49,205,52,203,54,205,54,205" title="Complexity: 1; Coverage: 0%; Class: RequestMatcher" alt="" href="bt/test/protocol/RequestMatcher.html#RequestMatcher"/>
+<area shape="poly" coords="54,199,52,202,49,199,52,197,54,199,54,199" title="Complexity: 3; Coverage: 0%; Class: SwarmPeer" alt="" href="bt/it/fixture/SwarmPeer.html#SwarmPeer"/>
+<area shape="poly" coords="54,139,52,141,49,139,52,136,54,139,54,139" title="Complexity: 24; Coverage: 0%; Class: SwarmBuilder" alt="" href="bt/it/fixture/SwarmBuilder.html#SwarmBuilder"/>
+<area shape="poly" coords="54,182,52,185,49,182,52,180,54,182,54,182" title="Complexity: 9; Coverage: 0%; Class: Swarm" alt="" href="bt/it/fixture/Swarm.html#Swarm"/>
+<area shape="poly" coords="54,196,52,199,49,196,52,194,54,196,54,196" title="Complexity: 4; Coverage: 0%; Class: SharedTrackerModule.StartResponse" alt="" href="bt/it/fixture/SharedTrackerModule.html#SharedTrackerModule.StartResponse"/>
+<area shape="poly" coords="54,188,52,190,49,188,52,185,54,188,54,188" title="Complexity: 7; Coverage: 0%; Class: SharedTrackerModule.KnownPeersService" alt="" href="bt/it/fixture/SharedTrackerModule.html#SharedTrackerModule.KnownPeersService"/>
+<area shape="poly" coords="54,162,52,164,49,162,52,159,54,162,54,162" title="Complexity: 16; Coverage: 0%; Class: SharedTrackerModule.PeerTrackerService" alt="" href="bt/it/fixture/SharedTrackerModule.html#SharedTrackerModule.PeerTrackerService"/>
+<area shape="poly" coords="54,205,52,208,49,205,52,203,54,205,54,205" title="Complexity: 1; Coverage: 0%; Class: RequestMatcher" alt="" href="bt/test/protocol/RequestMatcher.html#RequestMatcher"/>
+<area shape="poly" coords="54,196,52,199,49,196,52,194,54,196,54,196" title="Complexity: 4; Coverage: 0%; Class: SharedTrackerModule.StartResponse" alt="" href="bt/it/fixture/SharedTrackerModule.html#SharedTrackerModule.StartResponse"/>
+<area shape="poly" coords="54,205,52,208,49,205,52,203,54,205,54,205" title="Complexity: 1; Coverage: 0%; Class: RequestMatcher" alt="" href="bt/test/protocol/RequestMatcher.html#RequestMatcher"/>
+<area shape="poly" coords="54,191,52,193,49,191,52,188,54,191,54,191" title="Complexity: 6; Coverage: 0%; Class: LeecherPeer" alt="" href="bt/it/fixture/LeecherPeer.html#LeecherPeer"/>
+<area shape="poly" coords="54,188,52,190,49,188,52,185,54,188,54,188" title="Complexity: 7; Coverage: 0%; Class: SharedTrackerModule.KnownPeersService" alt="" href="bt/it/fixture/SharedTrackerModule.html#SharedTrackerModule.KnownPeersService"/>
+<area shape="poly" coords="54,194,52,196,49,194,52,191,54,194,54,194" title="Complexity: 5; Coverage: 0%; Class: BtRuntimeFactory" alt="" href="bt/it/fixture/BtRuntimeFactory.html#BtRuntimeFactory"/>
+<area shape="poly" coords="54,182,52,185,49,182,52,180,54,182,54,182" title="Complexity: 9; Coverage: 0%; Class: Swarm" alt="" href="bt/it/fixture/Swarm.html#Swarm"/>
+<area shape="poly" coords="54,191,52,193,49,191,52,188,54,191,54,191" title="Complexity: 6; Coverage: 0%; Class: LeecherPeer" alt="" href="bt/it/fixture/LeecherPeer.html#LeecherPeer"/>
+<area shape="poly" coords="54,182,52,185,49,182,52,180,54,182,54,182" title="Complexity: 9; Coverage: 0%; Class: Swarm" alt="" href="bt/it/fixture/Swarm.html#Swarm"/>
+<area shape="poly" coords="54,179,52,182,49,179,52,177,54,179,54,179" title="Complexity: 10; Coverage: 0%; Class: PeerExchange_IT" alt="" href="bt/it/pex/PeerExchange_IT.html#PeerExchange_IT"/>
+<area shape="poly" coords="54,202,52,205,49,202,52,200,54,202,54,202" title="Complexity: 2; Coverage: 0%; Class: TestExecutorServiceProvider" alt="" href="bt/it/fixture/TestExecutorServiceProvider.html#TestExecutorServiceProvider"/>
+<area shape="poly" coords="54,191,52,193,49,191,52,188,54,191,54,191" title="Complexity: 6; Coverage: 0%; Class: LeecherPeer" alt="" href="bt/it/fixture/LeecherPeer.html#LeecherPeer"/>
+<area shape="poly" coords="54,199,52,202,49,199,52,197,54,199,54,199" title="Complexity: 3; Coverage: 0%; Class: SwarmPeer" alt="" href="bt/it/fixture/SwarmPeer.html#SwarmPeer"/>
+<area shape="poly" coords="54,168,52,170,49,168,52,165,54,168,54,168" title="Complexity: 14; Coverage: 0%; Class: RarestFirstSelector.RandomizedIteratorOfInt" alt="" href="bt/torrent/selector/RarestFirstSelector.html#RarestFirstSelector.RandomizedIteratorOfInt"/>
+<area shape="poly" coords="54,199,52,202,49,199,52,197,54,199,54,199" title="Complexity: 3; Coverage: 0%; Class: SwarmPeer" alt="" href="bt/it/fixture/SwarmPeer.html#SwarmPeer"/>
+<area shape="poly" coords="54,170,52,173,49,170,52,168,54,170,54,170" title="Complexity: 13; Coverage: 0%; Class: RarestFirstSelector" alt="" href="bt/torrent/selector/RarestFirstSelector.html#RarestFirstSelector"/>
+<area shape="poly" coords="54,199,52,202,49,199,52,197,54,199,54,199" title="Complexity: 3; Coverage: 0%; Class: SwarmPeer" alt="" href="bt/it/fixture/SwarmPeer.html#SwarmPeer"/>
+<area shape="poly" coords="54,199,52,202,49,199,52,197,54,199,54,199" title="Complexity: 3; Coverage: 0%; Class: SwarmPeer" alt="" href="bt/it/fixture/SwarmPeer.html#SwarmPeer"/>
+<area shape="poly" coords="54,202,52,205,49,202,52,200,54,202,54,202" title="Complexity: 2; Coverage: 0%; Class: TestExecutorServiceProvider" alt="" href="bt/it/fixture/TestExecutorServiceProvider.html#TestExecutorServiceProvider"/>
+<area shape="poly" coords="54,202,52,205,49,202,52,200,54,202,54,202" title="Complexity: 2; Coverage: 0%; Class: TestExecutorServiceProvider" alt="" href="bt/it/fixture/TestExecutorServiceProvider.html#TestExecutorServiceProvider"/>
+<area shape="poly" coords="54,101,52,104,49,101,52,99,54,101,54,101" title="Complexity: 37; Coverage: 0%; Class: MessagingAgentCompiler" alt="" href="bt/torrent/compiler/MessagingAgentCompiler.html#MessagingAgentCompiler"/>
+<area shape="poly" coords="54,196,52,199,49,196,52,194,54,196,54,196" title="Complexity: 4; Coverage: 0%; Class: SharedTrackerModule.StartResponse" alt="" href="bt/it/fixture/SharedTrackerModule.html#SharedTrackerModule.StartResponse"/>
+<area shape="poly" coords="54,202,52,205,49,202,52,200,54,202,54,202" title="Complexity: 2; Coverage: 0%; Class: TestExecutorServiceProvider" alt="" href="bt/it/fixture/TestExecutorServiceProvider.html#TestExecutorServiceProvider"/>
+<area shape="poly" coords="54,188,52,190,49,188,52,185,54,188,54,188" title="Complexity: 7; Coverage: 0%; Class: SharedTrackerModule.KnownPeersService" alt="" href="bt/it/fixture/SharedTrackerModule.html#SharedTrackerModule.KnownPeersService"/>
+<area shape="poly" coords="54,191,52,193,49,191,52,188,54,191,54,191" title="Complexity: 6; Coverage: 0%; Class: LeecherPeer" alt="" href="bt/it/fixture/LeecherPeer.html#LeecherPeer"/>
+<area shape="poly" coords="54,156,52,159,49,156,52,154,54,156,54,156" title="Complexity: 18; Coverage: 0%; Class: FetchMetadataStage" alt="" href="bt/processor/magnet/FetchMetadataStage.html#FetchMetadataStage"/>
+<area shape="poly" coords="54,205,52,208,49,205,52,203,54,205,54,205" title="Complexity: 1; Coverage: 0%; Class: RequestMatcher" alt="" href="bt/test/protocol/RequestMatcher.html#RequestMatcher"/>
+<area shape="poly" coords="54,205,52,208,49,205,52,203,54,205,54,205" title="Complexity: 1; Coverage: 0%; Class: RequestMatcher" alt="" href="bt/test/protocol/RequestMatcher.html#RequestMatcher"/>
+<area shape="poly" coords="54,205,52,208,49,205,52,203,54,205,54,205" title="Complexity: 1; Coverage: 0%; Class: RequestMatcher" alt="" href="bt/test/protocol/RequestMatcher.html#RequestMatcher"/>
+<area shape="poly" coords="54,46,52,49,49,46,52,44,54,46,54,46" title="Complexity: 56; Coverage: 0%; Class: Config" alt="" href="bt/runtime/Config.html#Config"/>
+<area shape="poly" coords="54,104,52,107,49,104,52,102,54,104,54,104" title="Complexity: 36; Coverage: 0%; Class: BtRuntime" alt="" href="bt/runtime/BtRuntime.html#BtRuntime"/>
+<area shape="poly" coords="54,98,52,101,49,98,52,96,54,98,54,98" title="Complexity: 38; Coverage: 0%; Class: BtRuntimeBuilder" alt="" href="bt/runtime/BtRuntimeBuilder.html#BtRuntimeBuilder"/>
+<area shape="poly" coords="54,156,52,159,49,156,52,154,54,156,54,156" title="Complexity: 18; Coverage: 0%; Class: FetchMetadataStage" alt="" href="bt/processor/magnet/FetchMetadataStage.html#FetchMetadataStage"/>
+<area shape="poly" coords="54,185,52,187,49,185,52,182,54,185,54,185" title="Complexity: 8; Coverage: 0%; Class: SequentialSelectionStrategy" alt="" href="bt/torrent/SequentialSelectionStrategy.html#SequentialSelectionStrategy"/>
+<area shape="poly" coords="54,165,52,167,49,165,52,162,54,165,54,165" title="Complexity: 15; Coverage: 0%; Class: RarestFirstSelectionStrategy" alt="" href="bt/torrent/RarestFirstSelectionStrategy.html#RarestFirstSelectionStrategy"/>
+<area shape="poly" coords="54,199,52,202,49,199,52,197,54,199,54,199" title="Complexity: 3; Coverage: 0%; Class: SwarmPeer" alt="" href="bt/it/fixture/SwarmPeer.html#SwarmPeer"/>
+<area shape="poly" coords="54,153,52,156,49,153,52,151,54,153,54,153" title="Complexity: 19; Coverage: 0%; Class: DefaultTorrentSessionState" alt="" href="bt/torrent/DefaultTorrentSessionState.html#DefaultTorrentSessionState"/>
+<area shape="poly" coords="54,188,52,190,49,188,52,185,54,188,54,188" title="Complexity: 7; Coverage: 0%; Class: SharedTrackerModule.KnownPeersService" alt="" href="bt/it/fixture/SharedTrackerModule.html#SharedTrackerModule.KnownPeersService"/>
+<area shape="poly" coords="54,150,52,153,49,150,52,148,54,150,54,150" title="Complexity: 20; Coverage: 0%; Class: BitfieldBasedStatistics" alt="" href="bt/torrent/BitfieldBasedStatistics.html#BitfieldBasedStatistics"/>
+<area shape="poly" coords="54,159,52,161,49,159,52,156,54,159,54,159" title="Complexity: 17; Coverage: 0%; Class: ProtocolTestBuilder" alt="" href="bt/test/protocol/ProtocolTestBuilder.html#ProtocolTestBuilder"/>
+<area shape="poly" coords="267,185,264,187,262,185,264,182,267,185,267,185" title="Complexity: 8; Coverage: 85%; Class: ReadByBlockChannel" alt="" href="bt/net/ReadByBlockChannel.html#ReadByBlockChannel"/>
+<area shape="poly" coords="267,185,264,187,262,185,264,182,267,185,267,185" title="Complexity: 8; Coverage: 85%; Class: ReadByBlockChannel" alt="" href="bt/net/ReadByBlockChannel.html#ReadByBlockChannel"/>
+<area shape="poly" coords="54,176,52,179,49,176,52,174,54,176,54,176" title="Complexity: 11; Coverage: 0%; Class: WriteOnlyPeerConnection" alt="" href="bt/net/WriteOnlyPeerConnection.html#WriteOnlyPeerConnection"/>
+<area shape="poly" coords="54,130,52,133,49,130,52,128,54,130,54,130" title="Complexity: 27; Coverage: 0%; Class: SocketPeerConnection" alt="" href="bt/net/SocketPeerConnection.html#SocketPeerConnection"/>
+<area shape="poly" coords="54,145,52,147,49,145,52,142,54,145,54,145" title="Complexity: 22; Coverage: 0%; Class: SocketChannelConnectionAcceptor" alt="" href="bt/net/SocketChannelConnectionAcceptor.html#SocketChannelConnectionAcceptor"/>
+<area shape="poly" coords="54,165,52,167,49,165,52,162,54,165,54,165" title="Complexity: 15; Coverage: 0%; Class: RarestFirstSelectionStrategy" alt="" href="bt/torrent/RarestFirstSelectionStrategy.html#RarestFirstSelectionStrategy"/>
+<area shape="poly" coords="54,179,52,182,49,179,52,177,54,179,54,179" title="Complexity: 10; Coverage: 0%; Class: PeerExchange_IT" alt="" href="bt/it/pex/PeerExchange_IT.html#PeerExchange_IT"/>
+<area shape="poly" coords="54,173,52,176,49,173,52,171,54,173,54,173" title="Complexity: 12; Coverage: 0%; Class: Connections" alt="" href="bt/net/PeerConnectionPool.html#Connections"/>
+<area shape="poly" coords="54,194,52,196,49,194,52,191,54,194,54,194" title="Complexity: 5; Coverage: 0%; Class: BtRuntimeFactory" alt="" href="bt/it/fixture/BtRuntimeFactory.html#BtRuntimeFactory"/>
+<area shape="poly" coords="54,153,52,156,49,153,52,151,54,153,54,153" title="Complexity: 19; Coverage: 0%; Class: DefaultTorrentSessionState" alt="" href="bt/torrent/DefaultTorrentSessionState.html#DefaultTorrentSessionState"/>
+<area shape="poly" coords="54,119,52,121,49,119,52,116,54,119,54,119" title="Complexity: 31; Coverage: 0%; Class: PeerConnectionFactory" alt="" href="bt/net/PeerConnectionFactory.html#PeerConnectionFactory"/>
+<area shape="poly" coords="54,182,52,185,49,182,52,180,54,182,54,182" title="Complexity: 9; Coverage: 0%; Class: Swarm" alt="" href="bt/it/fixture/Swarm.html#Swarm"/>
+<area shape="poly" coords="54,199,52,202,49,199,52,197,54,199,54,199" title="Complexity: 3; Coverage: 0%; Class: SwarmPeer" alt="" href="bt/it/fixture/SwarmPeer.html#SwarmPeer"/>
+<area shape="poly" coords="54,199,52,202,49,199,52,197,54,199,54,199" title="Complexity: 3; Coverage: 0%; Class: SwarmPeer" alt="" href="bt/it/fixture/SwarmPeer.html#SwarmPeer"/>
+<area shape="poly" coords="54,188,52,190,49,188,52,185,54,188,54,188" title="Complexity: 7; Coverage: 0%; Class: SharedTrackerModule.KnownPeersService" alt="" href="bt/it/fixture/SharedTrackerModule.html#SharedTrackerModule.KnownPeersService"/>
+<area shape="poly" coords="54,110,52,112,49,110,52,107,54,110,54,110" title="Complexity: 34; Coverage: 0%; Class: MessageDispatcher.MessageDispatchingLoop" alt="" href="bt/net/MessageDispatcher.html#MessageDispatcher.MessageDispatchingLoop"/>
+<area shape="poly" coords="54,196,52,199,49,196,52,194,54,196,54,196" title="Complexity: 4; Coverage: 0%; Class: SharedTrackerModule.StartResponse" alt="" href="bt/it/fixture/SharedTrackerModule.html#SharedTrackerModule.StartResponse"/>
+<area shape="poly" coords="54,188,52,190,49,188,52,185,54,188,54,188" title="Complexity: 7; Coverage: 0%; Class: SharedTrackerModule.KnownPeersService" alt="" href="bt/it/fixture/SharedTrackerModule.html#SharedTrackerModule.KnownPeersService"/>
+<area shape="poly" coords="54,176,52,179,49,176,52,174,54,176,54,176" title="Complexity: 11; Coverage: 0%; Class: WriteOnlyPeerConnection" alt="" href="bt/net/WriteOnlyPeerConnection.html#WriteOnlyPeerConnection"/>
+<area shape="poly" coords="54,130,52,133,49,130,52,128,54,130,54,130" title="Complexity: 27; Coverage: 0%; Class: SocketPeerConnection" alt="" href="bt/net/SocketPeerConnection.html#SocketPeerConnection"/>
+<area shape="poly" coords="54,176,52,179,49,176,52,174,54,176,54,176" title="Complexity: 11; Coverage: 0%; Class: WriteOnlyPeerConnection" alt="" href="bt/net/WriteOnlyPeerConnection.html#WriteOnlyPeerConnection"/>
+<area shape="poly" coords="54,168,52,170,49,168,52,165,54,168,54,168" title="Complexity: 14; Coverage: 0%; Class: RarestFirstSelector.RandomizedIteratorOfInt" alt="" href="bt/torrent/selector/RarestFirstSelector.html#RarestFirstSelector.RandomizedIteratorOfInt"/>
+<area shape="poly" coords="54,133,52,135,49,133,52,130,54,133,54,133" title="Complexity: 26; Coverage: 0%; Class: DataReceivingLoop" alt="" href="bt/net/DataReceivingLoop.html#DataReceivingLoop"/>
+<area shape="poly" coords="54,130,52,133,49,130,52,128,54,130,54,130" title="Complexity: 27; Coverage: 0%; Class: SocketPeerConnection" alt="" href="bt/net/SocketPeerConnection.html#SocketPeerConnection"/>
+<area shape="poly" coords="54,179,52,182,49,179,52,177,54,179,54,179" title="Complexity: 10; Coverage: 0%; Class: PeerExchange_IT" alt="" href="bt/it/pex/PeerExchange_IT.html#PeerExchange_IT"/>
+<area shape="poly" coords="54,185,52,187,49,185,52,182,54,185,54,185" title="Complexity: 8; Coverage: 0%; Class: SequentialSelectionStrategy" alt="" href="bt/torrent/SequentialSelectionStrategy.html#SequentialSelectionStrategy"/>
+<area shape="poly" coords="54,194,52,196,49,194,52,191,54,194,54,194" title="Complexity: 5; Coverage: 0%; Class: BtRuntimeFactory" alt="" href="bt/it/fixture/BtRuntimeFactory.html#BtRuntimeFactory"/>
+<area shape="poly" coords="267,78,264,81,262,78,264,76,267,78,267,78" title="Complexity: 45; Coverage: 85%; Class: ByteChannelReader" alt="" href="bt/net/ByteChannelReader.html#ByteChannelReader"/>
+<area shape="poly" coords="54,185,52,187,49,185,52,182,54,185,54,185" title="Complexity: 8; Coverage: 0%; Class: SequentialSelectionStrategy" alt="" href="bt/torrent/SequentialSelectionStrategy.html#SequentialSelectionStrategy"/>
+<area shape="poly" coords="54,176,52,179,49,176,52,174,54,176,54,176" title="Complexity: 11; Coverage: 0%; Class: WriteOnlyPeerConnection" alt="" href="bt/net/WriteOnlyPeerConnection.html#WriteOnlyPeerConnection"/>
+<area shape="poly" coords="54,199,52,202,49,199,52,197,54,199,54,199" title="Complexity: 3; Coverage: 0%; Class: SwarmPeer" alt="" href="bt/it/fixture/SwarmPeer.html#SwarmPeer"/>
+<area shape="poly" coords="54,199,52,202,49,199,52,197,54,199,54,199" title="Complexity: 3; Coverage: 0%; Class: SwarmPeer" alt="" href="bt/it/fixture/SwarmPeer.html#SwarmPeer"/>
+<area shape="poly" coords="54,196,52,199,49,196,52,194,54,196,54,196" title="Complexity: 4; Coverage: 0%; Class: SharedTrackerModule.StartResponse" alt="" href="bt/it/fixture/SharedTrackerModule.html#SharedTrackerModule.StartResponse"/>
+<area shape="poly" coords="54,196,52,199,49,196,52,194,54,196,54,196" title="Complexity: 4; Coverage: 0%; Class: SharedTrackerModule.StartResponse" alt="" href="bt/it/fixture/SharedTrackerModule.html#SharedTrackerModule.StartResponse"/>
+<area shape="poly" coords="54,196,52,199,49,196,52,194,54,196,54,196" title="Complexity: 4; Coverage: 0%; Class: SharedTrackerModule.StartResponse" alt="" href="bt/it/fixture/SharedTrackerModule.html#SharedTrackerModule.StartResponse"/>
+<area shape="poly" coords="54,194,52,196,49,194,52,191,54,194,54,194" title="Complexity: 5; Coverage: 0%; Class: BtRuntimeFactory" alt="" href="bt/it/fixture/BtRuntimeFactory.html#BtRuntimeFactory"/>
+<area shape="poly" coords="54,121,52,124,49,121,52,119,54,121,54,121" title="Complexity: 30; Coverage: 0%; Class: EventBus" alt="" href="bt/event/EventBus.html#EventBus"/>
+<area shape="poly" coords="54,173,52,176,49,173,52,171,54,173,54,173" title="Complexity: 12; Coverage: 0%; Class: Connections" alt="" href="bt/net/PeerConnectionPool.html#Connections"/>
+<area shape="poly" coords="54,165,52,167,49,165,52,162,54,165,54,165" title="Complexity: 15; Coverage: 0%; Class: RarestFirstSelectionStrategy" alt="" href="bt/torrent/RarestFirstSelectionStrategy.html#RarestFirstSelectionStrategy"/>
+<area shape="poly" coords="54,191,52,193,49,191,52,188,54,191,54,191" title="Complexity: 6; Coverage: 0%; Class: LeecherPeer" alt="" href="bt/it/fixture/LeecherPeer.html#LeecherPeer"/>
+<area shape="poly" coords="54,179,52,182,49,179,52,177,54,179,54,179" title="Complexity: 10; Coverage: 0%; Class: PeerExchange_IT" alt="" href="bt/it/pex/PeerExchange_IT.html#PeerExchange_IT"/>
+<area shape="poly" coords="54,205,52,208,49,205,52,203,54,205,54,205" title="Complexity: 1; Coverage: 0%; Class: RequestMatcher" alt="" href="bt/test/protocol/RequestMatcher.html#RequestMatcher"/>
+<area shape="poly" coords="54,107,52,109,49,107,52,104,54,107,54,107" title="Complexity: 35; Coverage: 0%; Class: PeerRegistry" alt="" href="bt/peer/PeerRegistry.html#PeerRegistry"/>
+<area shape="poly" coords="54,199,52,202,49,199,52,197,54,199,54,199" title="Complexity: 3; Coverage: 0%; Class: SwarmPeer" alt="" href="bt/it/fixture/SwarmPeer.html#SwarmPeer"/>
+<area shape="poly" coords="54,196,52,199,49,196,52,194,54,196,54,196" title="Complexity: 4; Coverage: 0%; Class: SharedTrackerModule.StartResponse" alt="" href="bt/it/fixture/SharedTrackerModule.html#SharedTrackerModule.StartResponse"/>
+<area shape="poly" coords="54,179,52,182,49,179,52,177,54,179,54,179" title="Complexity: 10; Coverage: 0%; Class: PeerExchange_IT" alt="" href="bt/it/pex/PeerExchange_IT.html#PeerExchange_IT"/>
+<area shape="poly" coords="54,188,52,190,49,188,52,185,54,188,54,188" title="Complexity: 7; Coverage: 0%; Class: SharedTrackerModule.KnownPeersService" alt="" href="bt/it/fixture/SharedTrackerModule.html#SharedTrackerModule.KnownPeersService"/>
+<area shape="poly" coords="54,179,52,182,49,179,52,177,54,179,54,179" title="Complexity: 10; Coverage: 0%; Class: PeerExchange_IT" alt="" href="bt/it/pex/PeerExchange_IT.html#PeerExchange_IT"/>
+<area shape="poly" coords="54,188,52,190,49,188,52,185,54,188,54,188" title="Complexity: 7; Coverage: 0%; Class: SharedTrackerModule.KnownPeersService" alt="" href="bt/it/fixture/SharedTrackerModule.html#SharedTrackerModule.KnownPeersService"/>
+<area shape="poly" coords="54,188,52,190,49,188,52,185,54,188,54,188" title="Complexity: 7; Coverage: 0%; Class: SharedTrackerModule.KnownPeersService" alt="" href="bt/it/fixture/SharedTrackerModule.html#SharedTrackerModule.KnownPeersService"/>
+<area shape="poly" coords="54,20,52,23,49,20,52,18,54,20,54,20" title="Complexity: 65; Coverage: 0%; Class: MSEHandshakeProcessor" alt="" href="bt/net/crypto/MSEHandshakeProcessor.html#MSEHandshakeProcessor"/>
+<area shape="poly" coords="54,176,52,179,49,176,52,174,54,176,54,176" title="Complexity: 11; Coverage: 0%; Class: WriteOnlyPeerConnection" alt="" href="bt/net/WriteOnlyPeerConnection.html#WriteOnlyPeerConnection"/>
+<area shape="poly" coords="54,196,52,199,49,196,52,194,54,196,54,196" title="Complexity: 4; Coverage: 0%; Class: SharedTrackerModule.StartResponse" alt="" href="bt/it/fixture/SharedTrackerModule.html#SharedTrackerModule.StartResponse"/>
+<area shape="poly" coords="54,168,52,170,49,168,52,165,54,168,54,168" title="Complexity: 14; Coverage: 0%; Class: RarestFirstSelector.RandomizedIteratorOfInt" alt="" href="bt/torrent/selector/RarestFirstSelector.html#RarestFirstSelector.RandomizedIteratorOfInt"/>
+<area shape="poly" coords="54,188,52,190,49,188,52,185,54,188,54,188" title="Complexity: 7; Coverage: 0%; Class: SharedTrackerModule.KnownPeersService" alt="" href="bt/it/fixture/SharedTrackerModule.html#SharedTrackerModule.KnownPeersService"/>
+<area shape="poly" coords="54,156,52,159,49,156,52,154,54,156,54,156" title="Complexity: 18; Coverage: 0%; Class: FetchMetadataStage" alt="" href="bt/processor/magnet/FetchMetadataStage.html#FetchMetadataStage"/>
+<area shape="poly" coords="54,159,52,161,49,159,52,156,54,159,54,159" title="Complexity: 17; Coverage: 0%; Class: ProtocolTestBuilder" alt="" href="bt/test/protocol/ProtocolTestBuilder.html#ProtocolTestBuilder"/>
+<area shape="poly" coords="54,173,52,176,49,173,52,171,54,173,54,173" title="Complexity: 12; Coverage: 0%; Class: Connections" alt="" href="bt/net/PeerConnectionPool.html#Connections"/>
+<area shape="poly" coords="54,139,52,141,49,139,52,136,54,139,54,139" title="Complexity: 24; Coverage: 0%; Class: SwarmBuilder" alt="" href="bt/it/fixture/SwarmBuilder.html#SwarmBuilder"/>
+<area shape="poly" coords="54,176,52,179,49,176,52,174,54,176,54,176" title="Complexity: 11; Coverage: 0%; Class: WriteOnlyPeerConnection" alt="" href="bt/net/WriteOnlyPeerConnection.html#WriteOnlyPeerConnection"/>
+<area shape="poly" coords="54,205,52,208,49,205,52,203,54,205,54,205" title="Complexity: 1; Coverage: 0%; Class: RequestMatcher" alt="" href="bt/test/protocol/RequestMatcher.html#RequestMatcher"/>
+<area shape="poly" coords="54,191,52,193,49,191,52,188,54,191,54,191" title="Complexity: 6; Coverage: 0%; Class: LeecherPeer" alt="" href="bt/it/fixture/LeecherPeer.html#LeecherPeer"/>
+<area shape="poly" coords="54,147,52,150,49,147,52,145,54,147,54,147" title="Complexity: 21; Coverage: 0%; Class: MultiTracker" alt="" href="bt/tracker/MultiTracker.html#MultiTracker"/>
+<area shape="poly" coords="54,202,52,205,49,202,52,200,54,202,54,202" title="Complexity: 2; Coverage: 0%; Class: TestExecutorServiceProvider" alt="" href="bt/it/fixture/TestExecutorServiceProvider.html#TestExecutorServiceProvider"/>
+<area shape="poly" coords="54,173,52,176,49,173,52,171,54,173,54,173" title="Complexity: 12; Coverage: 0%; Class: Connections" alt="" href="bt/net/PeerConnectionPool.html#Connections"/>
+<area shape="poly" coords="74,168,72,170,69,168,72,165,74,168,74,168" title="Complexity: 14; Coverage: 8%; Class: AnnounceKey" alt="" href="bt/tracker/AnnounceKey.html#AnnounceKey"/>
+<area shape="poly" coords="54,191,52,193,49,191,52,188,54,191,54,191" title="Complexity: 6; Coverage: 0%; Class: LeecherPeer" alt="" href="bt/it/fixture/LeecherPeer.html#LeecherPeer"/>
+<area shape="poly" coords="54,145,52,147,49,145,52,142,54,145,54,145" title="Complexity: 22; Coverage: 0%; Class: SocketChannelConnectionAcceptor" alt="" href="bt/net/SocketChannelConnectionAcceptor.html#SocketChannelConnectionAcceptor"/>
+<area shape="poly" coords="54,191,52,193,49,191,52,188,54,191,54,191" title="Complexity: 6; Coverage: 0%; Class: LeecherPeer" alt="" href="bt/it/fixture/LeecherPeer.html#LeecherPeer"/>
+<area shape="poly" coords="54,182,52,185,49,182,52,180,54,182,54,182" title="Complexity: 9; Coverage: 0%; Class: Swarm" alt="" href="bt/it/fixture/Swarm.html#Swarm"/>
+<area shape="poly" coords="54,188,52,190,49,188,52,185,54,188,54,188" title="Complexity: 7; Coverage: 0%; Class: SharedTrackerModule.KnownPeersService" alt="" href="bt/it/fixture/SharedTrackerModule.html#SharedTrackerModule.KnownPeersService"/>
+<area shape="poly" coords="54,196,52,199,49,196,52,194,54,196,54,196" title="Complexity: 4; Coverage: 0%; Class: SharedTrackerModule.StartResponse" alt="" href="bt/it/fixture/SharedTrackerModule.html#SharedTrackerModule.StartResponse"/>
+<area shape="poly" coords="54,139,52,141,49,139,52,136,54,139,54,139" title="Complexity: 24; Coverage: 0%; Class: SwarmBuilder" alt="" href="bt/it/fixture/SwarmBuilder.html#SwarmBuilder"/>
+<area shape="poly" coords="54,179,52,182,49,179,52,177,54,179,54,179" title="Complexity: 10; Coverage: 0%; Class: PeerExchange_IT" alt="" href="bt/it/pex/PeerExchange_IT.html#PeerExchange_IT"/>
+<area shape="poly" coords="54,199,52,202,49,199,52,197,54,199,54,199" title="Complexity: 3; Coverage: 0%; Class: SwarmPeer" alt="" href="bt/it/fixture/SwarmPeer.html#SwarmPeer"/>
+<area shape="poly" coords="54,170,52,173,49,170,52,168,54,170,54,170" title="Complexity: 13; Coverage: 0%; Class: RarestFirstSelector" alt="" href="bt/torrent/selector/RarestFirstSelector.html#RarestFirstSelector"/>
+<area shape="poly" coords="54,202,52,205,49,202,52,200,54,202,54,202" title="Complexity: 2; Coverage: 0%; Class: TestExecutorServiceProvider" alt="" href="bt/it/fixture/TestExecutorServiceProvider.html#TestExecutorServiceProvider"/>
+<area shape="poly" coords="54,176,52,179,49,176,52,174,54,176,54,176" title="Complexity: 11; Coverage: 0%; Class: WriteOnlyPeerConnection" alt="" href="bt/net/WriteOnlyPeerConnection.html#WriteOnlyPeerConnection"/>
+<area shape="poly" coords="54,179,52,182,49,179,52,177,54,179,54,179" title="Complexity: 10; Coverage: 0%; Class: PeerExchange_IT" alt="" href="bt/it/pex/PeerExchange_IT.html#PeerExchange_IT"/>
+<area shape="poly" coords="54,145,52,147,49,145,52,142,54,145,54,145" title="Complexity: 22; Coverage: 0%; Class: SocketChannelConnectionAcceptor" alt="" href="bt/net/SocketChannelConnectionAcceptor.html#SocketChannelConnectionAcceptor"/>
+<area shape="poly" coords="54,196,52,199,49,196,52,194,54,196,54,196" title="Complexity: 4; Coverage: 0%; Class: SharedTrackerModule.StartResponse" alt="" href="bt/it/fixture/SharedTrackerModule.html#SharedTrackerModule.StartResponse"/>
+<area shape="poly" coords="54,156,52,159,49,156,52,154,54,156,54,156" title="Complexity: 18; Coverage: 0%; Class: FetchMetadataStage" alt="" href="bt/processor/magnet/FetchMetadataStage.html#FetchMetadataStage"/>
+<area shape="poly" coords="54,150,52,153,49,150,52,148,54,150,54,150" title="Complexity: 20; Coverage: 0%; Class: BitfieldBasedStatistics" alt="" href="bt/torrent/BitfieldBasedStatistics.html#BitfieldBasedStatistics"/>
+<area shape="poly" coords="54,188,52,190,49,188,52,185,54,188,54,188" title="Complexity: 7; Coverage: 0%; Class: SharedTrackerModule.KnownPeersService" alt="" href="bt/it/fixture/SharedTrackerModule.html#SharedTrackerModule.KnownPeersService"/>
+<area shape="poly" coords="54,185,52,187,49,185,52,182,54,185,54,185" title="Complexity: 8; Coverage: 0%; Class: SequentialSelectionStrategy" alt="" href="bt/torrent/SequentialSelectionStrategy.html#SequentialSelectionStrategy"/>
+<area shape="poly" coords="54,194,52,196,49,194,52,191,54,194,54,194" title="Complexity: 5; Coverage: 0%; Class: BtRuntimeFactory" alt="" href="bt/it/fixture/BtRuntimeFactory.html#BtRuntimeFactory"/>
+<area shape="poly" coords="54,199,52,202,49,199,52,197,54,199,54,199" title="Complexity: 3; Coverage: 0%; Class: SwarmPeer" alt="" href="bt/it/fixture/SwarmPeer.html#SwarmPeer"/>
+<area shape="poly" coords="54,202,52,205,49,202,52,200,54,202,54,202" title="Complexity: 2; Coverage: 0%; Class: TestExecutorServiceProvider" alt="" href="bt/it/fixture/TestExecutorServiceProvider.html#TestExecutorServiceProvider"/>
+<area shape="poly" coords="54,170,52,173,49,170,52,168,54,170,54,170" title="Complexity: 13; Coverage: 0%; Class: RarestFirstSelector" alt="" href="bt/torrent/selector/RarestFirstSelector.html#RarestFirstSelector"/>
+<area shape="poly" coords="54,188,52,190,49,188,52,185,54,188,54,188" title="Complexity: 7; Coverage: 0%; Class: SharedTrackerModule.KnownPeersService" alt="" href="bt/it/fixture/SharedTrackerModule.html#SharedTrackerModule.KnownPeersService"/>
+<area shape="poly" coords="54,182,52,185,49,182,52,180,54,182,54,182" title="Complexity: 9; Coverage: 0%; Class: Swarm" alt="" href="bt/it/fixture/Swarm.html#Swarm"/>
+<area shape="poly" coords="54,18,52,20,49,18,52,15,54,18,54,18" title="Complexity: 66; Coverage: 0%; Class: TorrentWorker" alt="" href="bt/torrent/messaging/TorrentWorker.html#TorrentWorker"/>
+<area shape="poly" coords="54,150,52,153,49,150,52,148,54,150,54,150" title="Complexity: 20; Coverage: 0%; Class: BitfieldBasedStatistics" alt="" href="bt/torrent/BitfieldBasedStatistics.html#BitfieldBasedStatistics"/>
+<area shape="poly" coords="54,150,52,153,49,150,52,148,54,150,54,150" title="Complexity: 20; Coverage: 0%; Class: BitfieldBasedStatistics" alt="" href="bt/torrent/BitfieldBasedStatistics.html#BitfieldBasedStatistics"/>
+<area shape="poly" coords="54,150,52,153,49,150,52,148,54,150,54,150" title="Complexity: 20; Coverage: 0%; Class: BitfieldBasedStatistics" alt="" href="bt/torrent/BitfieldBasedStatistics.html#BitfieldBasedStatistics"/>
+<area shape="poly" coords="54,196,52,199,49,196,52,194,54,196,54,196" title="Complexity: 4; Coverage: 0%; Class: SharedTrackerModule.StartResponse" alt="" href="bt/it/fixture/SharedTrackerModule.html#SharedTrackerModule.StartResponse"/>
+<area shape="poly" coords="54,168,52,170,49,168,52,165,54,168,54,168" title="Complexity: 14; Coverage: 0%; Class: RarestFirstSelector.RandomizedIteratorOfInt" alt="" href="bt/torrent/selector/RarestFirstSelector.html#RarestFirstSelector.RandomizedIteratorOfInt"/>
+<area shape="poly" coords="54,170,52,173,49,170,52,168,54,170,54,170" title="Complexity: 13; Coverage: 0%; Class: RarestFirstSelector" alt="" href="bt/torrent/selector/RarestFirstSelector.html#RarestFirstSelector"/>
+<area shape="poly" coords="54,124,52,127,49,124,52,122,54,124,54,124" title="Complexity: 29; Coverage: 0%; Class: MetadataConsumer" alt="" href="bt/torrent/messaging/MetadataConsumer.html#MetadataConsumer"/>
+<area shape="poly" coords="54,196,52,199,49,196,52,194,54,196,54,196" title="Complexity: 4; Coverage: 0%; Class: SharedTrackerModule.StartResponse" alt="" href="bt/it/fixture/SharedTrackerModule.html#SharedTrackerModule.StartResponse"/>
+<area shape="poly" coords="54,182,52,185,49,182,52,180,54,182,54,182" title="Complexity: 9; Coverage: 0%; Class: Swarm" alt="" href="bt/it/fixture/Swarm.html#Swarm"/>
+<area shape="poly" coords="54,194,52,196,49,194,52,191,54,194,54,194" title="Complexity: 5; Coverage: 0%; Class: BtRuntimeFactory" alt="" href="bt/it/fixture/BtRuntimeFactory.html#BtRuntimeFactory"/>
+<area shape="poly" coords="54,188,52,190,49,188,52,185,54,188,54,188" title="Complexity: 7; Coverage: 0%; Class: SharedTrackerModule.KnownPeersService" alt="" href="bt/it/fixture/SharedTrackerModule.html#SharedTrackerModule.KnownPeersService"/>
+<area shape="poly" coords="54,156,52,159,49,156,52,154,54,156,54,156" title="Complexity: 18; Coverage: 0%; Class: FetchMetadataStage" alt="" href="bt/processor/magnet/FetchMetadataStage.html#FetchMetadataStage"/>
+<area shape="poly" coords="54,176,52,179,49,176,52,174,54,176,54,176" title="Complexity: 11; Coverage: 0%; Class: WriteOnlyPeerConnection" alt="" href="bt/net/WriteOnlyPeerConnection.html#WriteOnlyPeerConnection"/>
+<area shape="poly" coords="54,168,52,170,49,168,52,165,54,168,54,168" title="Complexity: 14; Coverage: 0%; Class: RarestFirstSelector.RandomizedIteratorOfInt" alt="" href="bt/torrent/selector/RarestFirstSelector.html#RarestFirstSelector.RandomizedIteratorOfInt"/>
+<area shape="poly" coords="54,130,52,133,49,130,52,128,54,130,54,130" title="Complexity: 27; Coverage: 0%; Class: SocketPeerConnection" alt="" href="bt/net/SocketPeerConnection.html#SocketPeerConnection"/>
+<area shape="poly" coords="54,173,52,176,49,173,52,171,54,173,54,173" title="Complexity: 12; Coverage: 0%; Class: Connections" alt="" href="bt/net/PeerConnectionPool.html#Connections"/>
+<area shape="poly" coords="54,199,52,202,49,199,52,197,54,199,54,199" title="Complexity: 3; Coverage: 0%; Class: SwarmPeer" alt="" href="bt/it/fixture/SwarmPeer.html#SwarmPeer"/>
+<area shape="poly" coords="54,191,52,193,49,191,52,188,54,191,54,191" title="Complexity: 6; Coverage: 0%; Class: LeecherPeer" alt="" href="bt/it/fixture/LeecherPeer.html#LeecherPeer"/>
+<area shape="poly" coords="54,81,52,84,49,81,52,79,54,81,54,81" title="Complexity: 44; Coverage: 0%; Class: Assignments" alt="" href="bt/torrent/messaging/Assignments.html#Assignments"/>
+<area shape="poly" coords="54,153,52,156,49,153,52,151,54,153,54,153" title="Complexity: 19; Coverage: 0%; Class: DefaultTorrentSessionState" alt="" href="bt/torrent/DefaultTorrentSessionState.html#DefaultTorrentSessionState"/>
+<area shape="poly" coords="54,196,52,199,49,196,52,194,54,196,54,196" title="Complexity: 4; Coverage: 0%; Class: SharedTrackerModule.StartResponse" alt="" href="bt/it/fixture/SharedTrackerModule.html#SharedTrackerModule.StartResponse"/>
+<area shape="poly" coords="54,119,52,121,49,119,52,116,54,119,54,119" title="Complexity: 31; Coverage: 0%; Class: PeerConnectionFactory" alt="" href="bt/net/PeerConnectionFactory.html#PeerConnectionFactory"/>
+<area shape="poly" coords="54,182,52,185,49,182,52,180,54,182,54,182" title="Complexity: 9; Coverage: 0%; Class: Swarm" alt="" href="bt/it/fixture/Swarm.html#Swarm"/>
+<area shape="poly" coords="67,75,64,78,62,75,64,73,67,75,67,75" title="Complexity: 46; Coverage: 5%; Class: Protocols" alt="" href="bt/protocol/Protocols.html#Protocols"/>
+<area shape="poly" coords="54,182,52,185,49,182,52,180,54,182,54,182" title="Complexity: 9; Coverage: 0%; Class: Swarm" alt="" href="bt/it/fixture/Swarm.html#Swarm"/>
+<area shape="poly" coords="54,196,52,199,49,196,52,194,54,196,54,196" title="Complexity: 4; Coverage: 0%; Class: SharedTrackerModule.StartResponse" alt="" href="bt/it/fixture/SharedTrackerModule.html#SharedTrackerModule.StartResponse"/>
+<area shape="poly" coords="54,196,52,199,49,196,52,194,54,196,54,196" title="Complexity: 4; Coverage: 0%; Class: SharedTrackerModule.StartResponse" alt="" href="bt/it/fixture/SharedTrackerModule.html#SharedTrackerModule.StartResponse"/>
+<area shape="poly" coords="54,205,52,208,49,205,52,203,54,205,54,205" title="Complexity: 1; Coverage: 0%; Class: RequestMatcher" alt="" href="bt/test/protocol/RequestMatcher.html#RequestMatcher"/>
+<area shape="poly" coords="54,196,52,199,49,196,52,194,54,196,54,196" title="Complexity: 4; Coverage: 0%; Class: SharedTrackerModule.StartResponse" alt="" href="bt/it/fixture/SharedTrackerModule.html#SharedTrackerModule.StartResponse"/>
+<area shape="poly" coords="54,194,52,196,49,194,52,191,54,194,54,194" title="Complexity: 5; Coverage: 0%; Class: BtRuntimeFactory" alt="" href="bt/it/fixture/BtRuntimeFactory.html#BtRuntimeFactory"/>
+<area shape="poly" coords="54,199,52,202,49,199,52,197,54,199,54,199" title="Complexity: 3; Coverage: 0%; Class: SwarmPeer" alt="" href="bt/it/fixture/SwarmPeer.html#SwarmPeer"/>
+<area shape="poly" coords="54,179,52,182,49,179,52,177,54,179,54,179" title="Complexity: 10; Coverage: 0%; Class: PeerExchange_IT" alt="" href="bt/it/pex/PeerExchange_IT.html#PeerExchange_IT"/>
+<area shape="poly" coords="54,202,52,205,49,202,52,200,54,202,54,202" title="Complexity: 2; Coverage: 0%; Class: TestExecutorServiceProvider" alt="" href="bt/it/fixture/TestExecutorServiceProvider.html#TestExecutorServiceProvider"/>
+<area shape="poly" coords="54,196,52,199,49,196,52,194,54,196,54,196" title="Complexity: 4; Coverage: 0%; Class: SharedTrackerModule.StartResponse" alt="" href="bt/it/fixture/SharedTrackerModule.html#SharedTrackerModule.StartResponse"/>
+<area shape="poly" coords="54,196,52,199,49,196,52,194,54,196,54,196" title="Complexity: 4; Coverage: 0%; Class: SharedTrackerModule.StartResponse" alt="" href="bt/it/fixture/SharedTrackerModule.html#SharedTrackerModule.StartResponse"/>
+<area shape="poly" coords="54,182,52,185,49,182,52,180,54,182,54,182" title="Complexity: 9; Coverage: 0%; Class: Swarm" alt="" href="bt/it/fixture/Swarm.html#Swarm"/>
+<area shape="poly" coords="54,196,52,199,49,196,52,194,54,196,54,196" title="Complexity: 4; Coverage: 0%; Class: SharedTrackerModule.StartResponse" alt="" href="bt/it/fixture/SharedTrackerModule.html#SharedTrackerModule.StartResponse"/>
+<area shape="poly" coords="287,179,284,182,282,179,284,177,287,179,287,179" title="Complexity: 10; Coverage: 93%; Class: Buffers" alt="" href="bt/net/buffer/Buffers.html#Buffers"/>
+<area shape="poly" coords="54,191,52,193,49,191,52,188,54,191,54,191" title="Complexity: 6; Coverage: 0%; Class: LeecherPeer" alt="" href="bt/it/fixture/LeecherPeer.html#LeecherPeer"/>
+<area shape="poly" coords="54,182,52,185,49,182,52,180,54,182,54,182" title="Complexity: 9; Coverage: 0%; Class: Swarm" alt="" href="bt/it/fixture/Swarm.html#Swarm"/>
+<area shape="poly" coords="54,159,52,161,49,159,52,156,54,159,54,159" title="Complexity: 17; Coverage: 0%; Class: ProtocolTestBuilder" alt="" href="bt/test/protocol/ProtocolTestBuilder.html#ProtocolTestBuilder"/>
+<area shape="poly" coords="54,194,52,196,49,194,52,191,54,194,54,194" title="Complexity: 5; Coverage: 0%; Class: BtRuntimeFactory" alt="" href="bt/it/fixture/BtRuntimeFactory.html#BtRuntimeFactory"/>
+<area shape="poly" coords="54,173,52,176,49,173,52,171,54,173,54,173" title="Complexity: 12; Coverage: 0%; Class: Connections" alt="" href="bt/net/PeerConnectionPool.html#Connections"/>
+<area shape="poly" coords="187,145,184,147,182,145,184,142,187,145,187,145" title="Complexity: 22; Coverage: 53%; Class: PathNormalizer" alt="" href="bt/data/file/PathNormalizer.html#PathNormalizer"/>
+<area shape="poly" coords="229,69,227,72,224,69,227,67,229,69,229,69" title="Complexity: 48; Coverage: 70%; Class: FileSystemStorageUnit" alt="" href="bt/data/file/FileSystemStorageUnit.html#FileSystemStorageUnit"/>
+<area shape="poly" coords="304,196,302,199,299,196,302,194,304,196,304,196" title="Complexity: 4; Coverage: 100%; Class: FileSystemStorage" alt="" href="bt/data/file/FileSystemStorage.html#FileSystemStorage"/>
+<area shape="poly" coords="54,182,52,185,49,182,52,180,54,182,54,182" title="Complexity: 9; Coverage: 0%; Class: Swarm" alt="" href="bt/it/fixture/Swarm.html#Swarm"/>
+<area shape="poly" coords="54,145,52,147,49,145,52,142,54,145,54,145" title="Complexity: 22; Coverage: 0%; Class: SocketChannelConnectionAcceptor" alt="" href="bt/net/SocketChannelConnectionAcceptor.html#SocketChannelConnectionAcceptor"/>
+<area shape="poly" coords="54,196,52,199,49,196,52,194,54,196,54,196" title="Complexity: 4; Coverage: 0%; Class: SharedTrackerModule.StartResponse" alt="" href="bt/it/fixture/SharedTrackerModule.html#SharedTrackerModule.StartResponse"/>
+<area shape="poly" coords="54,194,52,196,49,194,52,191,54,194,54,194" title="Complexity: 5; Coverage: 0%; Class: BtRuntimeFactory" alt="" href="bt/it/fixture/BtRuntimeFactory.html#BtRuntimeFactory"/>
+<area shape="poly" coords="54,202,52,205,49,202,52,200,54,202,54,202" title="Complexity: 2; Coverage: 0%; Class: TestExecutorServiceProvider" alt="" href="bt/it/fixture/TestExecutorServiceProvider.html#TestExecutorServiceProvider"/>
+<area shape="poly" coords="54,150,52,153,49,150,52,148,54,150,54,150" title="Complexity: 20; Coverage: 0%; Class: BitfieldBasedStatistics" alt="" href="bt/torrent/BitfieldBasedStatistics.html#BitfieldBasedStatistics"/>
+<area shape="poly" coords="54,75,52,78,49,75,52,73,54,75,54,75" title="Complexity: 46; Coverage: 0%; Class: UdpMessageWorker" alt="" href="bt/tracker/udp/UdpMessageWorker.html#UdpMessageWorker"/>
+<area shape="poly" coords="54,194,52,196,49,194,52,191,54,194,54,194" title="Complexity: 5; Coverage: 0%; Class: BtRuntimeFactory" alt="" href="bt/it/fixture/BtRuntimeFactory.html#BtRuntimeFactory"/>
+<area shape="poly" coords="54,199,52,202,49,199,52,197,54,199,54,199" title="Complexity: 3; Coverage: 0%; Class: SwarmPeer" alt="" href="bt/it/fixture/SwarmPeer.html#SwarmPeer"/>
+<area shape="poly" coords="54,202,52,205,49,202,52,200,54,202,54,202" title="Complexity: 2; Coverage: 0%; Class: TestExecutorServiceProvider" alt="" href="bt/it/fixture/TestExecutorServiceProvider.html#TestExecutorServiceProvider"/>
+<area shape="poly" coords="54,196,52,199,49,196,52,194,54,196,54,196" title="Complexity: 4; Coverage: 0%; Class: SharedTrackerModule.StartResponse" alt="" href="bt/it/fixture/SharedTrackerModule.html#SharedTrackerModule.StartResponse"/>
+<area shape="poly" coords="54,202,52,205,49,202,52,200,54,202,54,202" title="Complexity: 2; Coverage: 0%; Class: TestExecutorServiceProvider" alt="" href="bt/it/fixture/TestExecutorServiceProvider.html#TestExecutorServiceProvider"/>
+<area shape="poly" coords="54,162,52,164,49,162,52,159,54,162,54,162" title="Complexity: 16; Coverage: 0%; Class: SharedTrackerModule.PeerTrackerService" alt="" href="bt/it/fixture/SharedTrackerModule.html#SharedTrackerModule.PeerTrackerService"/>
+<area shape="poly" coords="257,173,254,176,252,173,254,171,257,173,257,173" title="Complexity: 12; Coverage: 81%; Class: TestUtil" alt="" href="bt/TestUtil.html#TestUtil"/>
+<area shape="poly" coords="54,142,52,144,49,142,52,139,54,142,54,142" title="Complexity: 23; Coverage: 0%; Class: TorrentClientBuilder" alt="" href="bt/TorrentClientBuilder.html#TorrentClientBuilder"/>
+<area shape="poly" coords="54,191,52,193,49,191,52,188,54,191,54,191" title="Complexity: 6; Coverage: 0%; Class: LeecherPeer" alt="" href="bt/it/fixture/LeecherPeer.html#LeecherPeer"/>
+<area shape="poly" coords="54,179,52,182,49,179,52,177,54,179,54,179" title="Complexity: 10; Coverage: 0%; Class: PeerExchange_IT" alt="" href="bt/it/pex/PeerExchange_IT.html#PeerExchange_IT"/>
+<area shape="poly" coords="54,165,52,167,49,165,52,162,54,165,54,165" title="Complexity: 15; Coverage: 0%; Class: RarestFirstSelectionStrategy" alt="" href="bt/torrent/RarestFirstSelectionStrategy.html#RarestFirstSelectionStrategy"/>
+<area shape="poly" coords="54,191,52,193,49,191,52,188,54,191,54,191" title="Complexity: 6; Coverage: 0%; Class: LeecherPeer" alt="" href="bt/it/fixture/LeecherPeer.html#LeecherPeer"/>
+<area shape="poly" coords="54,191,52,193,49,191,52,188,54,191,54,191" title="Complexity: 6; Coverage: 0%; Class: LeecherPeer" alt="" href="bt/it/fixture/LeecherPeer.html#LeecherPeer"/>
+<area shape="poly" coords="54,202,52,205,49,202,52,200,54,202,54,202" title="Complexity: 2; Coverage: 0%; Class: TestExecutorServiceProvider" alt="" href="bt/it/fixture/TestExecutorServiceProvider.html#TestExecutorServiceProvider"/>
+<area shape="poly" coords="54,205,52,208,49,205,52,203,54,205,54,205" title="Complexity: 1; Coverage: 0%; Class: RequestMatcher" alt="" href="bt/test/protocol/RequestMatcher.html#RequestMatcher"/>
+<area shape="poly" coords="54,202,52,205,49,202,52,200,54,202,54,202" title="Complexity: 2; Coverage: 0%; Class: TestExecutorServiceProvider" alt="" href="bt/it/fixture/TestExecutorServiceProvider.html#TestExecutorServiceProvider"/>
+<area shape="poly" coords="54,185,52,187,49,185,52,182,54,185,54,185" title="Complexity: 8; Coverage: 0%; Class: SequentialSelectionStrategy" alt="" href="bt/torrent/SequentialSelectionStrategy.html#SequentialSelectionStrategy"/>
+<area shape="poly" coords="54,119,52,121,49,119,52,116,54,119,54,119" title="Complexity: 31; Coverage: 0%; Class: PeerConnectionFactory" alt="" href="bt/net/PeerConnectionFactory.html#PeerConnectionFactory"/>
+<area shape="poly" coords="54,202,52,205,49,202,52,200,54,202,54,202" title="Complexity: 2; Coverage: 0%; Class: TestExecutorServiceProvider" alt="" href="bt/it/fixture/TestExecutorServiceProvider.html#TestExecutorServiceProvider"/>
+<area shape="poly" coords="54,196,52,199,49,196,52,194,54,196,54,196" title="Complexity: 4; Coverage: 0%; Class: SharedTrackerModule.StartResponse" alt="" href="bt/it/fixture/SharedTrackerModule.html#SharedTrackerModule.StartResponse"/>
+<area shape="poly" coords="54,182,52,185,49,182,52,180,54,182,54,182" title="Complexity: 9; Coverage: 0%; Class: Swarm" alt="" href="bt/it/fixture/Swarm.html#Swarm"/>
+<area shape="poly" coords="54,162,52,164,49,162,52,159,54,162,54,162" title="Complexity: 16; Coverage: 0%; Class: SharedTrackerModule.PeerTrackerService" alt="" href="bt/it/fixture/SharedTrackerModule.html#SharedTrackerModule.PeerTrackerService"/>
+<area shape="poly" coords="54,199,52,202,49,199,52,197,54,199,54,199" title="Complexity: 3; Coverage: 0%; Class: SwarmPeer" alt="" href="bt/it/fixture/SwarmPeer.html#SwarmPeer"/>
+<area shape="poly" coords="54,173,52,176,49,173,52,171,54,173,54,173" title="Complexity: 12; Coverage: 0%; Class: Connections" alt="" href="bt/net/PeerConnectionPool.html#Connections"/>
+<area shape="poly" coords="54,202,52,205,49,202,52,200,54,202,54,202" title="Complexity: 2; Coverage: 0%; Class: TestExecutorServiceProvider" alt="" href="bt/it/fixture/TestExecutorServiceProvider.html#TestExecutorServiceProvider"/>
+<area shape="poly" coords="54,145,52,147,49,145,52,142,54,145,54,145" title="Complexity: 22; Coverage: 0%; Class: SocketChannelConnectionAcceptor" alt="" href="bt/net/SocketChannelConnectionAcceptor.html#SocketChannelConnectionAcceptor"/>
+<area shape="poly" coords="54,191,52,193,49,191,52,188,54,191,54,191" title="Complexity: 6; Coverage: 0%; Class: LeecherPeer" alt="" href="bt/it/fixture/LeecherPeer.html#LeecherPeer"/>
+<area shape="poly" coords="54,168,52,170,49,168,52,165,54,168,54,168" title="Complexity: 14; Coverage: 0%; Class: RarestFirstSelector.RandomizedIteratorOfInt" alt="" href="bt/torrent/selector/RarestFirstSelector.html#RarestFirstSelector.RandomizedIteratorOfInt"/>
+<area shape="poly" coords="54,194,52,196,49,194,52,191,54,194,54,194" title="Complexity: 5; Coverage: 0%; Class: BtRuntimeFactory" alt="" href="bt/it/fixture/BtRuntimeFactory.html#BtRuntimeFactory"/>
+<area shape="poly" coords="54,199,52,202,49,199,52,197,54,199,54,199" title="Complexity: 3; Coverage: 0%; Class: SwarmPeer" alt="" href="bt/it/fixture/SwarmPeer.html#SwarmPeer"/>
+<area shape="poly" coords="54,199,52,202,49,199,52,197,54,199,54,199" title="Complexity: 3; Coverage: 0%; Class: SwarmPeer" alt="" href="bt/it/fixture/SwarmPeer.html#SwarmPeer"/>
+<area shape="poly" coords="54,173,52,176,49,173,52,171,54,173,54,173" title="Complexity: 12; Coverage: 0%; Class: Connections" alt="" href="bt/net/PeerConnectionPool.html#Connections"/>
+<area shape="poly" coords="54,196,52,199,49,196,52,194,54,196,54,196" title="Complexity: 4; Coverage: 0%; Class: SharedTrackerModule.StartResponse" alt="" href="bt/it/fixture/SharedTrackerModule.html#SharedTrackerModule.StartResponse"/>
+<area shape="poly" coords="264,170,262,173,259,170,262,168,264,170,264,170" title="Complexity: 13; Coverage: 84%; Class: TestFileSystemStorage" alt="" href="bt/data/TestFileSystemStorage.html#TestFileSystemStorage"/>
+<area shape="poly" coords="282,165,279,167,277,165,279,162,282,165,282,165" title="Complexity: 15; Coverage: 91%; Class: ChunkDescriptorTestUtil" alt="" href="bt/data/ChunkDescriptorTestUtil.html#ChunkDescriptorTestUtil"/>
+<area shape="poly" coords="247,188,244,190,242,188,244,185,247,188,247,188" title="Complexity: 7; Coverage: 77%; Class: UnitAccess" alt="" href="bt/data/UnitAccess.html#UnitAccess"/>
+<area shape="poly" coords="239,150,237,153,234,150,237,148,239,150,239,150" title="Complexity: 20; Coverage: 74%; Class: DefaultChunkVerifier" alt="" href="bt/data/DefaultChunkVerifier.html#DefaultChunkVerifier"/>
+<area shape="poly" coords="212,179,209,182,207,179,209,177,212,179,212,179" title="Complexity: 10; Coverage: 63%; Class: DefaultChunkDescriptor" alt="" href="bt/data/DefaultChunkDescriptor.html#DefaultChunkDescriptor"/>
+<area shape="poly" coords="127,93,124,95,122,93,124,90,127,93,127,93" title="Complexity: 40; Coverage: 29%; Class: Bitfield" alt="" href="bt/data/Bitfield.html#Bitfield"/>
+<area shape="poly" coords="304,202,302,205,299,202,302,200,304,202,304,202" title="Complexity: 2; Coverage: 100%; Class: DataDescriptorFactory" alt="" href="bt/data/DataDescriptorFactory.html#DataDescriptorFactory"/>
+<area shape="poly" coords="244,153,242,156,239,153,242,151,244,153,244,153" title="Complexity: 19; Coverage: 76%; Class: DefaultDataDescriptor" alt="" href="bt/data/DefaultDataDescriptor.html#DefaultDataDescriptor"/>
+<area shape="poly" coords="274,49,272,52,269,49,272,47,274,49,274,49" title="Complexity: 55; Coverage: 88%; Class: ReadWriteDataRange" alt="" href="bt/data/ReadWriteDataRange.html#ReadWriteDataRange"/>
+<area shape="poly" coords="54,199,52,202,49,199,52,197,54,199,54,199" title="Complexity: 3; Coverage: 0%; Class: SwarmPeer" alt="" href="bt/it/fixture/SwarmPeer.html#SwarmPeer"/>
+<area shape="poly" coords="54,199,52,202,49,199,52,197,54,199,54,199" title="Complexity: 3; Coverage: 0%; Class: SwarmPeer" alt="" href="bt/it/fixture/SwarmPeer.html#SwarmPeer"/>
+<area shape="poly" coords="54,179,52,182,49,179,52,177,54,179,54,179" title="Complexity: 10; Coverage: 0%; Class: PeerExchange_IT" alt="" href="bt/it/pex/PeerExchange_IT.html#PeerExchange_IT"/>
+<area shape="poly" coords="54,179,52,182,49,179,52,177,54,179,54,179" title="Complexity: 10; Coverage: 0%; Class: PeerExchange_IT" alt="" href="bt/it/pex/PeerExchange_IT.html#PeerExchange_IT"/>
+<area shape="poly" coords="54,199,52,202,49,199,52,197,54,199,54,199" title="Complexity: 3; Coverage: 0%; Class: SwarmPeer" alt="" href="bt/it/fixture/SwarmPeer.html#SwarmPeer"/>
+<area shape="poly" coords="54,199,52,202,49,199,52,197,54,199,54,199" title="Complexity: 3; Coverage: 0%; Class: SwarmPeer" alt="" href="bt/it/fixture/SwarmPeer.html#SwarmPeer"/>
+<area shape="poly" coords="54,185,52,187,49,185,52,182,54,185,54,185" title="Complexity: 8; Coverage: 0%; Class: SequentialSelectionStrategy" alt="" href="bt/torrent/SequentialSelectionStrategy.html#SequentialSelectionStrategy"/>
+<area shape="poly" coords="54,199,52,202,49,199,52,197,54,199,54,199" title="Complexity: 3; Coverage: 0%; Class: SwarmPeer" alt="" href="bt/it/fixture/SwarmPeer.html#SwarmPeer"/>
+<area shape="poly" coords="54,179,52,182,49,179,52,177,54,179,54,179" title="Complexity: 10; Coverage: 0%; Class: PeerExchange_IT" alt="" href="bt/it/pex/PeerExchange_IT.html#PeerExchange_IT"/>
+<area shape="poly" coords="54,191,52,193,49,191,52,188,54,191,54,191" title="Complexity: 6; Coverage: 0%; Class: LeecherPeer" alt="" href="bt/it/fixture/LeecherPeer.html#LeecherPeer"/>
+<area shape="poly" coords="54,185,52,187,49,185,52,182,54,185,54,185" title="Complexity: 8; Coverage: 0%; Class: SequentialSelectionStrategy" alt="" href="bt/torrent/SequentialSelectionStrategy.html#SequentialSelectionStrategy"/>
+<area shape="poly" coords="242,199,239,202,237,199,239,197,242,199,242,199" title="Complexity: 3; Coverage: 75%; Class: SHA1Digester" alt="" href="bt/data/digest/SHA1Digester.html#SHA1Digester"/>
+<area shape="poly" coords="192,176,189,179,187,176,189,174,192,176,192,176" title="Complexity: 11; Coverage: 55%; Class: JavaSecurityDigester" alt="" href="bt/data/digest/JavaSecurityDigester.html#JavaSecurityDigester"/>
+<area shape="poly" coords="54,133,52,135,49,133,52,130,54,133,54,133" title="Complexity: 26; Coverage: 0%; Class: DataReceivingLoop" alt="" href="bt/net/DataReceivingLoop.html#DataReceivingLoop"/>
+<area shape="poly" coords="54,162,52,164,49,162,52,159,54,162,54,162" title="Complexity: 16; Coverage: 0%; Class: SharedTrackerModule.PeerTrackerService" alt="" href="bt/it/fixture/SharedTrackerModule.html#SharedTrackerModule.PeerTrackerService"/>
+<area shape="poly" coords="54,182,52,185,49,182,52,180,54,182,54,182" title="Complexity: 9; Coverage: 0%; Class: Swarm" alt="" href="bt/it/fixture/Swarm.html#Swarm"/>
+<area shape="poly" coords="54,185,52,187,49,185,52,182,54,185,54,185" title="Complexity: 8; Coverage: 0%; Class: SequentialSelectionStrategy" alt="" href="bt/torrent/SequentialSelectionStrategy.html#SequentialSelectionStrategy"/>
+<area shape="poly" coords="54,191,52,193,49,191,52,188,54,191,54,191" title="Complexity: 6; Coverage: 0%; Class: LeecherPeer" alt="" href="bt/it/fixture/LeecherPeer.html#LeecherPeer"/>
+<area shape="poly" coords="54,182,52,185,49,182,52,180,54,182,54,182" title="Complexity: 9; Coverage: 0%; Class: Swarm" alt="" href="bt/it/fixture/Swarm.html#Swarm"/>
+<area shape="poly" coords="54,170,52,173,49,170,52,168,54,170,54,170" title="Complexity: 13; Coverage: 0%; Class: RarestFirstSelector" alt="" href="bt/torrent/selector/RarestFirstSelector.html#RarestFirstSelector"/>
+<area shape="poly" coords="54,145,52,147,49,145,52,142,54,145,54,145" title="Complexity: 22; Coverage: 0%; Class: SocketChannelConnectionAcceptor" alt="" href="bt/net/SocketChannelConnectionAcceptor.html#SocketChannelConnectionAcceptor"/>
+<area shape="poly" coords="54,150,52,153,49,150,52,148,54,150,54,150" title="Complexity: 20; Coverage: 0%; Class: BitfieldBasedStatistics" alt="" href="bt/torrent/BitfieldBasedStatistics.html#BitfieldBasedStatistics"/>
+<area shape="poly" coords="54,194,52,196,49,194,52,191,54,194,54,194" title="Complexity: 5; Coverage: 0%; Class: BtRuntimeFactory" alt="" href="bt/it/fixture/BtRuntimeFactory.html#BtRuntimeFactory"/>
+<area shape="poly" coords="54,191,52,193,49,191,52,188,54,191,54,191" title="Complexity: 6; Coverage: 0%; Class: LeecherPeer" alt="" href="bt/it/fixture/LeecherPeer.html#LeecherPeer"/>
+<area shape="poly" coords="54,205,52,208,49,205,52,203,54,205,54,205" title="Complexity: 1; Coverage: 0%; Class: RequestMatcher" alt="" href="bt/test/protocol/RequestMatcher.html#RequestMatcher"/>
+<area shape="poly" coords="54,202,52,205,49,202,52,200,54,202,54,202" title="Complexity: 2; Coverage: 0%; Class: TestExecutorServiceProvider" alt="" href="bt/it/fixture/TestExecutorServiceProvider.html#TestExecutorServiceProvider"/>
+<area shape="poly" coords="54,196,52,199,49,196,52,194,54,196,54,196" title="Complexity: 4; Coverage: 0%; Class: SharedTrackerModule.StartResponse" alt="" href="bt/it/fixture/SharedTrackerModule.html#SharedTrackerModule.StartResponse"/>
+<area shape="poly" coords="54,147,52,150,49,147,52,145,54,147,54,147" title="Complexity: 21; Coverage: 0%; Class: MultiTracker" alt="" href="bt/tracker/MultiTracker.html#MultiTracker"/>
+<area shape="poly" coords="54,205,52,208,49,205,52,203,54,205,54,205" title="Complexity: 1; Coverage: 0%; Class: RequestMatcher" alt="" href="bt/test/protocol/RequestMatcher.html#RequestMatcher"/>
+<area shape="poly" coords="54,150,52,153,49,150,52,148,54,150,54,150" title="Complexity: 20; Coverage: 0%; Class: BitfieldBasedStatistics" alt="" href="bt/torrent/BitfieldBasedStatistics.html#BitfieldBasedStatistics"/>
+<area shape="poly" coords="54,170,52,173,49,170,52,168,54,170,54,170" title="Complexity: 13; Coverage: 0%; Class: RarestFirstSelector" alt="" href="bt/torrent/selector/RarestFirstSelector.html#RarestFirstSelector"/>
+<area shape="poly" coords="54,185,52,187,49,185,52,182,54,185,54,185" title="Complexity: 8; Coverage: 0%; Class: SequentialSelectionStrategy" alt="" href="bt/torrent/SequentialSelectionStrategy.html#SequentialSelectionStrategy"/>
+<area shape="poly" coords="54,191,52,193,49,191,52,188,54,191,54,191" title="Complexity: 6; Coverage: 0%; Class: LeecherPeer" alt="" href="bt/it/fixture/LeecherPeer.html#LeecherPeer"/>
+<area shape="poly" coords="54,194,52,196,49,194,52,191,54,194,54,194" title="Complexity: 5; Coverage: 0%; Class: BtRuntimeFactory" alt="" href="bt/it/fixture/BtRuntimeFactory.html#BtRuntimeFactory"/>
+<area shape="poly" coords="54,182,52,185,49,182,52,180,54,182,54,182" title="Complexity: 9; Coverage: 0%; Class: Swarm" alt="" href="bt/it/fixture/Swarm.html#Swarm"/>
+<area shape="poly" coords="54,191,52,193,49,191,52,188,54,191,54,191" title="Complexity: 6; Coverage: 0%; Class: LeecherPeer" alt="" href="bt/it/fixture/LeecherPeer.html#LeecherPeer"/>
+<area shape="poly" coords="54,182,52,185,49,182,52,180,54,182,54,182" title="Complexity: 9; Coverage: 0%; Class: Swarm" alt="" href="bt/it/fixture/Swarm.html#Swarm"/>
+<area shape="poly" coords="54,185,52,187,49,185,52,182,54,185,54,185" title="Complexity: 8; Coverage: 0%; Class: SequentialSelectionStrategy" alt="" href="bt/torrent/SequentialSelectionStrategy.html#SequentialSelectionStrategy"/>
+<area shape="poly" coords="54,196,52,199,49,196,52,194,54,196,54,196" title="Complexity: 4; Coverage: 0%; Class: SharedTrackerModule.StartResponse" alt="" href="bt/it/fixture/SharedTrackerModule.html#SharedTrackerModule.StartResponse"/>
+<area shape="poly" coords="54,194,52,196,49,194,52,191,54,194,54,194" title="Complexity: 5; Coverage: 0%; Class: BtRuntimeFactory" alt="" href="bt/it/fixture/BtRuntimeFactory.html#BtRuntimeFactory"/>
+<area shape="poly" coords="54,191,52,193,49,191,52,188,54,191,54,191" title="Complexity: 6; Coverage: 0%; Class: LeecherPeer" alt="" href="bt/it/fixture/LeecherPeer.html#LeecherPeer"/>
+<area shape="poly" coords="262,202,259,205,257,202,259,200,262,202,262,202" title="Complexity: 2; Coverage: 83%; Class: CryptoUtil" alt="" href="bt/service/CryptoUtil.html#CryptoUtil"/>
+<area shape="poly" coords="54,156,52,159,49,156,52,154,54,156,54,156" title="Complexity: 18; Coverage: 0%; Class: FetchMetadataStage" alt="" href="bt/processor/magnet/FetchMetadataStage.html#FetchMetadataStage"/>
+<area shape="poly" coords="54,176,52,179,49,176,52,174,54,176,54,176" title="Complexity: 11; Coverage: 0%; Class: WriteOnlyPeerConnection" alt="" href="bt/net/WriteOnlyPeerConnection.html#WriteOnlyPeerConnection"/>
+<area shape="poly" coords="54,107,52,109,49,107,52,104,54,107,54,107" title="Complexity: 35; Coverage: 0%; Class: PeerRegistry" alt="" href="bt/peer/PeerRegistry.html#PeerRegistry"/>
+<area shape="poly" coords="54,173,52,176,49,173,52,171,54,173,54,173" title="Complexity: 12; Coverage: 0%; Class: Connections" alt="" href="bt/net/PeerConnectionPool.html#Connections"/>
+<area shape="poly" coords="54,116,52,118,49,116,52,113,54,116,54,116" title="Complexity: 32; Coverage: 0%; Class: DefaultTorrent" alt="" href="bt/metainfo/DefaultTorrent.html#DefaultTorrent"/>
+<area shape="poly" coords="284,182,282,185,279,182,282,180,284,182,284,182" title="Complexity: 9; Coverage: 92%; Class: SynchronizedRange" alt="" href="bt/data/range/SynchronizedRange.html#SynchronizedRange"/>
+<area shape="poly" coords="254,185,252,187,249,185,252,182,254,185,254,185" title="Complexity: 8; Coverage: 80%; Class: SynchronizedDataRange" alt="" href="bt/data/range/SynchronizedDataRange.html#SynchronizedDataRange"/>
+<area shape="poly" coords="129,185,127,187,124,185,127,182,129,185,129,185" title="Complexity: 8; Coverage: 30%; Class: SynchronizedBlockSet" alt="" href="bt/data/range/SynchronizedBlockSet.html#SynchronizedBlockSet"/>
+<area shape="poly" coords="214,191,212,193,209,191,212,188,214,191,214,191" title="Complexity: 6; Coverage: 64%; Class: Ranges" alt="" href="bt/data/range/Ranges.html#Ranges"/>
+<area shape="poly" coords="247,150,244,153,242,150,244,148,247,150,247,150" title="Complexity: 20; Coverage: 77%; Class: MutableBlockSet" alt="" href="bt/data/range/MutableBlockSet.html#MutableBlockSet"/>
+<area shape="poly" coords="172,182,169,185,167,182,169,180,172,182,172,182" title="Complexity: 9; Coverage: 47%; Class: DelegatingDataRange" alt="" href="bt/data/range/DelegatingDataRange.html#DelegatingDataRange"/>
+<area shape="poly" coords="54,124,52,127,49,124,52,122,54,124,54,124" title="Complexity: 29; Coverage: 0%; Class: MetadataConsumer" alt="" href="bt/torrent/messaging/MetadataConsumer.html#MetadataConsumer"/>
+<area shape="poly" coords="279,182,277,185,274,182,277,180,279,182,279,182" title="Complexity: 9; Coverage: 90%; Class: BlockRange" alt="" href="bt/data/range/BlockRange.html#BlockRange"/>
+</map>
+            </div>
+        </div>
+        
+                    <div class="dashboard-widget">
+                <header class="dashboard-widget-header">
+                    <h3>Coverage tree map</h3>
+                </header>
+                <div class="dashboard-widget-content">
+                    <div id="infovis" style="width:100%; height:250px;">
+                        <div id="treemap-loader" style="position:relative;top:50px;">
+                            <p>
+                                Generating Coverage Tree Map. Please wait...
+                            </p>
+                            <p>
+                                <img src="img/ajax-loader.gif" alt="Loading Treemap"/>
+                            </p>
+                        </div>
+                    </div>
+                    <p><a href="treemap.html">See more</a></p>
+                </div>
+
+            </div>
+            </div>
+
+
+    <div class="aui-item">
+        <div class="dashboard-widget">
+            <header class="dashboard-widget-header">
+                <h3>Top 20 project risks</h3>
+            </header>
+            <div class="dashboard-widget-content">
+                
+                                                                <a class="tag" href="bt/net/buffer/Buffers.html"
+                            style="font-size: 28px;color:#89c495"
+                            title="Average Method Complexity - 10 , Coverage - 93,2% ">Buffers</a>
+                                    
+                                                                <a class="tag" href="bt/data/ReadWriteDataRange.html"
+                            style="font-size: 19px;color:#89c495"
+                            title="Average Method Complexity - 4,583 , Coverage - 88,8% ">ReadWriteDataRange</a>
+                                    
+                                                                <a class="tag" href="bt/service/NetworkUtil.html"
+                            style="font-size: 24px;color:#d04437"
+                            title="Average Method Complexity - 8 , Coverage - 0% ">NetworkUtil</a>
+                                    
+                                                                <a class="tag" href="bt/data/file/FileSystemStorageUnit.html"
+                            style="font-size: 19px;color:#fae1a0"
+                            title="Average Method Complexity - 4,8 , Coverage - 70,9% ">FileSystemStorageUnit</a>
+                                    
+                                                                <a class="tag" href="bt/TestUtil.html"
+                            style="font-size: 18px;color:#14892c"
+                            title="Average Method Complexity - 4 , Coverage - 81,2% ">TestUtil</a>
+                                    
+                                                                <a class="tag" href="bt/net/MessageDispatcher.html"
+                            style="font-size: 22px;color:#d04437"
+                            title="Average Method Complexity - 6,8 , Coverage - 0% ">MessageDispatcher.MessageDispatchingLoop</a>
+                                    
+                                                                <a class="tag" href="bt/net/ConnectionSource.html"
+                            style="font-size: 22px;color:#d04437"
+                            title="Average Method Complexity - 6,75 , Coverage - 0% ">ConnectionSource</a>
+                                    
+                                                                <a class="tag" href="bt/net/ByteChannelReader.html"
+                            style="font-size: 17px;color:#14892c"
+                            title="Average Method Complexity - 3,462 , Coverage - 85,6% ">ByteChannelReader</a>
+                                    
+                                                                <a class="tag" href="bt/service/ClasspathApplicationService.html"
+                            style="font-size: 21px;color:#d04437"
+                            title="Average Method Complexity - 6 , Coverage - 0% ">ClasspathApplicationService</a>
+                                    
+                                                                <a class="tag" href="bt/peerexchange/PeerExchangePeerSourceFactory.html"
+                            style="font-size: 21px;color:#d04437"
+                            title="Average Method Complexity - 6 , Coverage - 0% ">PeerExchangePeerSourceFactory.Cleaner</a>
+                                    
+                                                                <a class="tag" href="bt/net/crypto/MSEHandshakeProcessor.html"
+                            style="font-size: 21px;color:#d04437"
+                            title="Average Method Complexity - 5,909 , Coverage - 0% ">MSEHandshakeProcessor</a>
+                                    
+                                                                <a class="tag" href="bt/data/file/PathNormalizer.html"
+                            style="font-size: 19px;color:#e7a19b"
+                            title="Average Method Complexity - 4,4 , Coverage - 53,3% ">PathNormalizer</a>
+                                    
+                                                                <a class="tag" href="bt/net/BigIntegers.html"
+                            style="font-size: 20px;color:#d04437"
+                            title="Average Method Complexity - 5,5 , Coverage - 0% ">BigIntegers</a>
+                                    
+                                                                <a class="tag" href="bt/net/IncomingHandshakeHandler.html"
+                            style="font-size: 20px;color:#d04437"
+                            title="Average Method Complexity - 5,5 , Coverage - 0% ">IncomingHandshakeHandler</a>
+                                    
+                                                                <a class="tag" href="bt/net/PeerConnectionPool.html"
+                            style="font-size: 20px;color:#d04437"
+                            title="Average Method Complexity - 5 , Coverage - 0% ">PeerConnectionPool.Cleaner</a>
+                                    
+                                                                <a class="tag" href="bt/protocol/crypto/EncryptionPolicy.html"
+                            style="font-size: 20px;color:#d04437"
+                            title="Average Method Complexity - 5 , Coverage - 0% ">EncryptionPolicy</a>
+                                    
+                                                                <a class="tag" href="bt/data/DefaultChunkVerifier.html"
+                            style="font-size: 17px;color:#fae1a0"
+                            title="Average Method Complexity - 3,333 , Coverage - 74,7% ">DefaultChunkVerifier</a>
+                                    
+                                                                <a class="tag" href="bt/torrent/messaging/MetadataConsumer.html"
+                            style="font-size: 19px;color:#d04437"
+                            title="Average Method Complexity - 4,833 , Coverage - 0% ">MetadataConsumer</a>
+                                    
+                                                                <a class="tag" href="bt/torrent/compiler/MessagingAgentCompiler.html"
+                            style="font-size: 19px;color:#d04437"
+                            title="Average Method Complexity - 4,625 , Coverage - 0% ">MessagingAgentCompiler</a>
+                                    
+                                                                <a class="tag" href="bt/tracker/udp/UdpMessageWorker.html"
+                            style="font-size: 19px;color:#d04437"
+                            title="Average Method Complexity - 4,6 , Coverage - 0% ">UdpMessageWorker</a>
+                                                    <p><a href="top-risks.html">See more</a></p>
+            </div>
+        </div>
+
+        <div class="dashboard-widget">
+            <header class="dashboard-widget-header">
+                <h3>Most complex packages</h3>
+            </header>
+            <div class="dashboard-widget-content">
+                
+                <table class="aui">
+                                            
+                                                <tr>
+                            <td>1. </td>
+                            <td><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.118438765</span>11,8%</div><div style="display: table-cell">
+ <div title="11,8% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:11.8%"></div></div></div></div></td>
+                            <td>
+                                <a href="bt/net/pkg-summary.html">bt.net</a>
+                                <span class="aui-badge" title="Package complexity">438</span>
+                            </td>
+                        </tr>
+                                            
+                                                <tr>
+                            <td>2. </td>
+                            <td><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                            <td>
+                                <a href="bt/torrent/messaging/pkg-summary.html">bt.torrent.messaging</a>
+                                <span class="aui-badge" title="Package complexity">374</span>
+                            </td>
+                        </tr>
+                                            
+                                                <tr>
+                            <td>3. </td>
+                            <td><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.6936672</span>69,4%</div><div style="display: table-cell">
+ <div title="69,4% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:69.4%"></div></div></div></div></td>
+                            <td>
+                                <a href="bt/data/pkg-summary.html">bt.data</a>
+                                <span class="aui-badge" title="Package complexity">181</span>
+                            </td>
+                        </tr>
+                                            
+                                                <tr>
+                            <td>4. </td>
+                            <td><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.015118791</span>1,5%</div><div style="display: table-cell">
+ <div title="1,5% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:1.5%"></div></div></div></div></td>
+                            <td>
+                                <a href="bt/protocol/pkg-summary.html">bt.protocol</a>
+                                <span class="aui-badge" title="Package complexity">153</span>
+                            </td>
+                        </tr>
+                                            
+                                                <tr>
+                            <td>5. </td>
+                            <td><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                            <td>
+                                <a href="bt/tracker/udp/pkg-summary.html">bt.tracker.udp</a>
+                                <span class="aui-badge" title="Package complexity">140</span>
+                            </td>
+                        </tr>
+                                    </table>
+            </div>
+        </div>
+
+        <div class="dashboard-widget">
+            <header class="dashboard-widget-header">
+                <h3>Most complex classes</h3>
+            </header>
+            <div class="dashboard-widget-content">
+                <table class="aui">
+                                            
+                                                <tr>
+                            <td>1. </td>
+                            <td><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                            <td>
+                                <a  href="bt/torrent/messaging/TorrentWorker.html"  title="bt.torrent.messaging.TorrentWorker">TorrentWorker</a>
+                                <span class="aui-badge" title="Class complexity">66</span>
+                            </td>
+                        </tr>
+                                            
+                                                <tr>
+                            <td>2. </td>
+                            <td><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                            <td>
+                                <a  href="bt/net/crypto/MSEHandshakeProcessor.html"  title="bt.net.crypto.MSEHandshakeProcessor">MSEHandshakeProcessor</a>
+                                <span class="aui-badge" title="Class complexity">65</span>
+                            </td>
+                        </tr>
+                                            
+                                                <tr>
+                            <td>3. </td>
+                            <td><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                            <td>
+                                <a  href="bt/runtime/Config.html"  title="bt.runtime.Config">Config</a>
+                                <span class="aui-badge" title="Class complexity">56</span>
+                            </td>
+                        </tr>
+                                            
+                                                <tr>
+                            <td>4. </td>
+                            <td><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.8877551</span>88,8%</div><div style="display: table-cell">
+ <div title="88,8% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:88.8%"></div></div></div></div></td>
+                            <td>
+                                <a  href="bt/data/ReadWriteDataRange.html"  title="bt.data.ReadWriteDataRange">ReadWriteDataRange</a>
+                                <span class="aui-badge" title="Class complexity">55</span>
+                            </td>
+                        </tr>
+                                            
+                                                <tr>
+                            <td>5. </td>
+                            <td><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.7092199</span>70,9%</div><div style="display: table-cell">
+ <div title="70,9% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:70.9%"></div></div></div></div></td>
+                            <td>
+                                <a  href="bt/data/file/FileSystemStorageUnit.html"  title="bt.data.file.FileSystemStorageUnit">FileSystemStorageUnit</a>
+                                <span class="aui-badge" title="Class complexity">48</span>
+                            </td>
+                        </tr>
+                                    </table>
+            </div>
+        </div>
+
+                <div class="dashboard-widget">
+            <header class="dashboard-widget-header">
+                <h3>Least tested methods</h3>
+            </header>
+            <div class="dashboard-widget-content">
+                <table class="aui">
+                                            
+
+                    <tr>
+                        <td align="right">1.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="MSEHandshakeProcessor.negotiateIncoming(Peer,ByteChannel,ByteBuffer,ByteBuffer)&#160;:&#160;Optional&lt;MSECipher&gt;" href="bt/net/crypto/MSEHandshakeProcessor.html?line=291#src-291">MSEHandshakeProcessor.negotiateIncoming(Peer,ByteChannel,ByteBuffer,ByteBuffer)&#160;:&#160;Optional&lt;MSECipher&gt;</a>
+                            <span class="aui-badge" title="Method complexity">20</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">2.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="MSEHandshakeProcessor.negotiateOutgoing(Peer,ByteChannel,TorrentId,ByteBuffer,ByteBuffer)&#160;:&#160;Optional&lt;MSECipher&gt;" href="bt/net/crypto/MSEHandshakeProcessor.html?line=121#src-121">MSEHandshakeProcessor.negotiateOutgoing(Peer,ByteChannel,TorrentId,ByteBuffer,ByteBuffer)&#160;:&#160;Optional&lt;MSECipher&gt;</a>
+                            <span class="aui-badge" title="Method complexity">11</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">3.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="MetadataService.buildTorrent(BEParser)&#160;:&#160;Torrent" href="bt/metainfo/MetadataService.html?line=108#src-108">MetadataService.buildTorrent(BEParser)&#160;:&#160;Torrent</a>
+                            <span class="aui-badge" title="Method complexity">16</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">4.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="ConnectionSource.getConnectionAsync(Peer,TorrentId)&#160;:&#160;CompletableFuture&lt;ConnectionResult&gt;" href="bt/net/ConnectionSource.html?line=84#src-84">ConnectionSource.getConnectionAsync(Peer,TorrentId)&#160;:&#160;CompletableFuture&lt;ConnectionResult&gt;</a>
+                            <span class="aui-badge" title="Method complexity">20</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">5.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="Assignments.assign(Peer)&#160;:&#160;Optional&lt;Assignment&gt;" href="bt/torrent/messaging/Assignments.html?line=86#src-86">Assignments.assign(Peer)&#160;:&#160;Optional&lt;Assignment&gt;</a>
+                            <span class="aui-badge" title="Method complexity">17</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">6.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="Assignments.update(Set&lt;Peer&gt;,Set&lt;Peer&gt;)&#160;:&#160;Set&lt;Peer&gt;" href="bt/torrent/messaging/Assignments.html?line=174#src-174">Assignments.update(Set&lt;Peer&gt;,Set&lt;Peer&gt;)&#160;:&#160;Set&lt;Peer&gt;</a>
+                            <span class="aui-badge" title="Method complexity">17</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">7.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="UdpMessageWorker.doSend(UdpTrackerMessage,Session,UdpTrackerResponseHandler&lt;T&gt;)&#160;:&#160;T" href="bt/tracker/udp/UdpMessageWorker.html?line=110#src-110">UdpMessageWorker.doSend(UdpTrackerMessage,Session,UdpTrackerResponseHandler&lt;T&gt;)&#160;:&#160;T</a>
+                            <span class="aui-badge" title="Method complexity">14</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">8.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="BtRuntimeBuilder.createInjector()&#160;:&#160;Injector" href="bt/runtime/BtRuntimeBuilder.html?line=179#src-179">BtRuntimeBuilder.createInjector()&#160;:&#160;Injector</a>
+                            <span class="aui-badge" title="Method complexity">13</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">9.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="TorrentWorker.inspectAssignment(Peer,PeerWorker,Assignments)&#160;:&#160;void" href="bt/torrent/messaging/TorrentWorker.html?line=185#src-185">TorrentWorker.inspectAssignment(Peer,PeerWorker,Assignments)&#160;:&#160;void</a>
+                            <span class="aui-badge" title="Method complexity">12</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">10.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="MessageDispatcher.MessageDispatchingLoop.run()&#160;:&#160;void" href="bt/net/MessageDispatcher.html?line=93#src-93">MessageDispatcher.MessageDispatchingLoop.run()&#160;:&#160;void</a>
+                            <span class="aui-badge" title="Method complexity">12</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">11.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="ClasspathApplicationService.ClasspathApplicationService()" href="bt/service/ClasspathApplicationService.html?line=54#src-54">ClasspathApplicationService.ClasspathApplicationService()</a>
+                            <span class="aui-badge" title="Method complexity">14</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">12.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="MessagingAgentCompiler.compileType(Class&lt;?&gt;,Collection&lt;ConsumerInfo&gt;,Collection&lt;ProducerInfo&gt;)&#160;:&#160;int" href="bt/torrent/compiler/MessagingAgentCompiler.html?line=112#src-112">MessagingAgentCompiler.compileType(Class&lt;?&gt;,Collection&lt;ConsumerInfo&gt;,Collection&lt;ProducerInfo&gt;)&#160;:&#160;int</a>
+                            <span class="aui-badge" title="Method complexity">12</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">13.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="RarestFirstSelectionStrategy.getNextPieces(PieceStatistics,int,Predicate&lt;Integer&gt;)&#160;:&#160;Integer[]" href="bt/torrent/RarestFirstSelectionStrategy.html?line=82#src-82">RarestFirstSelectionStrategy.getNextPieces(PieceStatistics,int,Predicate&lt;Integer&gt;)&#160;:&#160;Integer[]</a>
+                            <span class="aui-badge" title="Method complexity">12</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">14.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="PieceConsumer.consume(Piece,MessageContext)&#160;:&#160;void" href="bt/torrent/messaging/PieceConsumer.html?line=55#src-55">PieceConsumer.consume(Piece,MessageContext)&#160;:&#160;void</a>
+                            <span class="aui-badge" title="Method complexity">10</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">15.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="TorrentWorker.updateAssignments(Assignments)&#160;:&#160;void" href="bt/torrent/messaging/TorrentWorker.html?line=282#src-282">TorrentWorker.updateAssignments(Assignments)&#160;:&#160;void</a>
+                            <span class="aui-badge" title="Method complexity">8</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">16.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="PeerExchangePeerSourceFactory.produce(Consumer&lt;Message&gt;,MessageContext)&#160;:&#160;void" href="bt/peerexchange/PeerExchangePeerSourceFactory.html?line=149#src-149">PeerExchangePeerSourceFactory.produce(Consumer&lt;Message&gt;,MessageContext)&#160;:&#160;void</a>
+                            <span class="aui-badge" title="Method complexity">9</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">17.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="MessageDispatcher.MessageDispatchingLoop.processConsumerMap(TorrentId)&#160;:&#160;void" href="bt/net/MessageDispatcher.html?line=138#src-138">MessageDispatcher.MessageDispatchingLoop.processConsumerMap(TorrentId)&#160;:&#160;void</a>
+                            <span class="aui-badge" title="Method complexity">10</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">18.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="StandardBittorrentProtocol.readMessageType(ByteBuffer)&#160;:&#160;Class&lt;?&#160;extends&#160;Message&gt;" href="bt/protocol/StandardBittorrentProtocol.html?line=192#src-192">StandardBittorrentProtocol.readMessageType(ByteBuffer)&#160;:&#160;Class&lt;?&#160;extends&#160;Message&gt;</a>
+                            <span class="aui-badge" title="Method complexity">8</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">19.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="MessageDispatcher.MessageDispatchingLoop.processSupplierMap(TorrentId)&#160;:&#160;void" href="bt/net/MessageDispatcher.html?line=184#src-184">MessageDispatcher.MessageDispatchingLoop.processSupplierMap(TorrentId)&#160;:&#160;void</a>
+                            <span class="aui-badge" title="Method complexity">10</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">20.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="MSEHandshakeProcessor.selectPolicy(byte[],EncryptionPolicy)&#160;:&#160;EncryptionPolicy" href="bt/net/crypto/MSEHandshakeProcessor.html?line=557#src-557">MSEHandshakeProcessor.selectPolicy(byte[],EncryptionPolicy)&#160;:&#160;EncryptionPolicy</a>
+                            <span class="aui-badge" title="Method complexity">12</span>
+
+                        </td>
+                    </tr>
+                                    </table>
+            </div>
+        </div>
+        
+    </div>
+</div>
+                            </div> <!-- tabs-pane active-pane -->
+                        </div>
+
+    <script type="text/javascript" src="jit.js" ></script>
+    <script type="text/javascript" src="treemap-dash-json.js" ></script>
+
+                        </div> <!-- class="aui-page-panel-content-clover" -->
+                    <footer id="footer" role="contentinfo">
+    <section class="footer-body">
+        <ul>
+            <li>
+                Report generated by <a target="_new" href="http://openclover.org">OpenClover</a> v 4.2.1
+                on ti feb 27 2018 17:43:00 CET using coverage data from ti feb 27 2018 17:42:59 CET.
+            </li>
+        </ul>
+        <ul>
+            <li>Clover free edition. </li>
+        </ul>
+    </section>
+</footer>                </section> <!-- class="aui-page-panel-content" -->
+            </div> <!-- class="aui-page-panel-inner" -->
+        </div> <!-- class="aui-page-panel" -->
+    </div> <!-- id="page" -->
+</body>
+</html>
