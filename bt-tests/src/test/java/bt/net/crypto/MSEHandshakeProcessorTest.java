@@ -24,6 +24,7 @@ import java.nio.ByteBuffer;
 import java.nio.channels.ByteChannel;
 import java.security.MessageDigest;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Optional;
 
@@ -78,7 +79,7 @@ public class MSEHandshakeProcessorTest {
 			@Override public int write(ByteBuffer arg0) throws IOException { return 0; }
 		}
 
-		// Key must be at lease 16 byte
+		// Key must be at least 16 byte
 		Config config = new Config();
 		config.setMsePrivateKeySize(16);
 
@@ -246,7 +247,7 @@ public class MSEHandshakeProcessorTest {
 	public void test_negotiateIncoming_EncryptionPolicy_PREFER_PLAINTEXT() {
 		//Contract: if the encryption policy is PREFER_PLAINTEXTE it should return Optional.empty
 		
-		// Key must be at lease 16 byte
+		// Key must be at least 16 byte
 		Config config = new Config();
 		config.setMsePrivateKeySize(16);
 		config.setEncryptionPolicy(EncryptionPolicy.PREFER_PLAINTEXT);
@@ -265,7 +266,33 @@ public class MSEHandshakeProcessorTest {
 			e.printStackTrace();
 			assertTrue(false);
 		}
+	}
+	
+	@Test 
+	public void test_negotiateIncoming_EncryptionPolicy_PREFER_ENCRYPTED() {
+		//Contract: if the encryption policy is PREFER_ENCRYPTED it should return Optional containing the cipher
 		
+		// Key must be at least 16 byte
+		Config config = new Config();
+		config.setMsePrivateKeySize(16);
+		config.setEncryptionPolicy(EncryptionPolicy.PREFER_ENCRYPTED);
+
+		// Instantiate a new processor with the correct values to bypas checks
+		FakeTorrent torrent = new FakeTorrent();
+		MSEHandshakeProcessor processor = new MSEHandshakeProcessor(torrent, new MsgHandler(), config);
+
+		try {
+			// Buffer must have at least 96 bytes of space
+			ByteBuffer in = ByteBuffer.allocate(100);
+			ByteBuffer out = ByteBuffer.allocate(1000);
+			// Should return Optional.empty()
+			Optional<MSECipher> result = processor.negotiateIncoming(null, new FakeChannel(), in, out);			
+			assertEquals(true, result.isPresent());
+			assertEquals(result.get().getClass(), MSECipher.class);
+		} catch (Exception e) {
+			e.printStackTrace();
+			assertTrue(false);
+		}
 	}
 	
 	@Test 
