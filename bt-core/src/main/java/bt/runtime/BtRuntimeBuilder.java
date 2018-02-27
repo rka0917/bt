@@ -186,19 +186,19 @@ public class BtRuntimeBuilder {
         Map<Class<? extends Module>, Module> standardExtensions;
         if (shouldDisableStandardExtensions) {
             standardExtensions = new HashMap<>();
-            System.out.println("#CC# 1");
+            System.out.println("#CC# createInjector 1");
         } else {
             standardExtensions = mapByClass(collectModules(standardExtensionProviders()));
-            System.out.println("#CC# 2");
+            System.out.println("#CC# createInjector 2");
         }
 
         Map<Class<? extends Module>, Module> autoLoadedModules;
         if (shouldAutoLoadModules) {
             autoLoadedModules = mapByClass(collectModules(autoLoadedProviders()));
-            System.out.println("#CC# 3");
+            System.out.println("#CC# createInjector 3");
         } else {
             autoLoadedModules = new HashMap<>();
-            System.out.println("#CC# 4");
+            System.out.println("#CC# createInjector 4");
         }
 
         Map<Class<? extends Module>, Module> customModules = mapByClass(collectModules(customProviders()));
@@ -206,9 +206,9 @@ public class BtRuntimeBuilder {
         standardExtensions.forEach((k, v) -> {
             if (!autoLoadedModules.containsKey(k) && !customModules.containsKey(k)) {
                 LOGGER.info("Loading standard extension module {}", k.getName());
-                System.out.println("#CC# 5");
+                System.out.println("#CC# createInjector 5");
             }
-            else System.out.println("#CC# 6");
+            else System.out.println("#CC# createInjector 6");
         });
 
         customModules.forEach((k, v) -> {
@@ -216,13 +216,13 @@ public class BtRuntimeBuilder {
             boolean overridesStandardExtension = standardExtensions.containsKey(k);
             if (autoLoadedModules.containsKey(k)) {
                 LOGGER.info("Overriding auto-loaded module {}", k.getName());
-                System.out.println("#CC# 7");
+                System.out.println("#CC# createInjector 7");
             } else if (overridesStandardModule || overridesStandardExtension) {
                 LOGGER.info("Overriding standard " + (overridesStandardModule ? "module" : "extension") + " {}", k.getName());
-                System.out.println("#CC# 8");
+                System.out.println("#CC# createInjector 8");
             } else {
                 LOGGER.info("Loading module {}", k.getName());
-                System.out.println("#CC# 9");
+                System.out.println("#CC# createInjector 9");
             }
         });
 
@@ -231,18 +231,18 @@ public class BtRuntimeBuilder {
             boolean overridesStandardExtension = standardExtensions.containsKey(k);
             boolean overridenByCustomModule = customModules.containsKey(k);
             if (!overridenByCustomModule) {
-            	System.out.println("#CC# 10");
+            	System.out.println("#CC# createInjector 10");
                 if (overridesStandardModule || overridesStandardExtension) {
                     // don't log if there is a custom module, that will override the auto-loaded version
                     LOGGER.info("Overriding standard " + (overridesStandardModule ? "module" : "extension") +
                             " {} with auto-loaded version", k.getName());
-                    System.out.println("#CC# 11");
+                    System.out.println("#CC# createInjector 11");
                 } else {
                     LOGGER.info("Auto-loading module {} with default configuration", k.getName());
-                    System.out.println("#CC# 12");
+                    System.out.println("#CC# createInjector 12");
                 }
             }
-            else System.out.println("#CC# 13");
+            else System.out.println("#CC# createInjector 13");
         });
         
         cc.writeToFile("createInjector");
