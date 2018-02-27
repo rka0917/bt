@@ -50,7 +50,7 @@ public class MSEHandshakeProcessorTest {
 
 	@Test
 	public void test_negotiateIncoming_consumed_greater_than_zero() {
-		// CONTRACT: negotiateIncoming should return an empty optional if decoding was successful and it can use plaintext (if supported)
+		// Contract: negotiateIncoming should return an empty optional if decoding was successful and it can use plaintext (if supported)
 
 		// Fake class for testing
 		class MsgHandler implements MessageHandler<Message> {
@@ -99,7 +99,7 @@ public class MSEHandshakeProcessorTest {
 
 	@Test
 	public void test_negotiateIncoming_EncryptionPolicy_PREFER_PLAINTEXT() {
-		// CONTRACT: if the encryption policy is PREFER_PLAINTEXTE it should return Optional.empty
+		// Contract: if the encryption policy is PREFER_PLAINTEXTE it should return Optional.empty
 
 		// Fake class for testing
 		class MsgHandler implements MessageHandler<Message> {
@@ -340,7 +340,7 @@ public class MSEHandshakeProcessorTest {
 
   @Test
   public void test_negotiateIncoming_null_torrent() {
-    /* CONTRACT:
+    /* Contract:
     * If the input is valid except for the but the torrentID,
     * it should throw an IllegalStateException with message "Unsupported torrent requested"
     */
