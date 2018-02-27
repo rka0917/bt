@@ -22,6 +22,7 @@ import java.util.List;
 
 import static bt.TestUtil.assertExceptionWithMessage;
 import static bt.data.ChunkDescriptorTestUtil.mockStorageUnits;
+import static org.junit.Assert.assertEquals;
 
 public class ReadWriteDataRange_SubrangeExceptionsTest {
 
@@ -60,7 +61,8 @@ public class ReadWriteDataRange_SubrangeExceptionsTest {
                 it -> new ReadWriteDataRange(units, 0, len).getSubrange(-1),
                 "Illegal arguments: offset (-1)");
     }
-
+    
+    
     @Test
     public void testSubrange_NegativeOffset_TwoArgsMethod() {
         long len = 256;
@@ -77,5 +79,32 @@ public class ReadWriteDataRange_SubrangeExceptionsTest {
         assertExceptionWithMessage(
                 it -> new ReadWriteDataRange(units, 0, len).getSubrange(len, 1),
                 "Offset is too large: 256, expected 0..255");
+    }
+    
+    @Test
+    public void testSubrange_ZeroOffset() {
+    	// Contract: If the offset is 0 and the length requested is same as the length of the actual item , then return the same item
+        long len = 256;
+        List<StorageUnit> units = mockStorageUnits(len);
+        ReadWriteDataRange actual = new ReadWriteDataRange(units, 0, len);
+        assertEquals(actual.getSubrange(0, len), actual);
+    }
+    
+    @Test
+    public void testSubrange_InsufficientData() {
+    	// Contract: If data in this chunk is insufficient to fulfill the block request then throw an exception
+    	List<StorageUnit> units = mockStorageUnits(3);
+        assertExceptionWithMessage(
+        		it -> new ReadWriteDataRange(units, 0, 3).getSubrange(2,4),
+        		"Insufficient data (offset: 2, requested length: 4)");
+    }
+    
+    @Test
+    public void testSubrange_InsufficientData_1() {
+    	// Contract: If data in this chunk is insufficient to fulfill the block request then throw an exception
+        List<StorageUnit> units = mockStorageUnits(4,5);
+        assertExceptionWithMessage(
+        		it -> new ReadWriteDataRange(units, 0, 2).getSubrange(3,4),
+        		"Insufficient data (offset: 3, requested length: 4)");
     }
 }
