@@ -2,7 +2,9 @@
 # Report for assignment 4
 ## Project
 Name: Bt 
+
 URL: https://github.com/atomashpolskiy/bt 
+
 A bitTorrent client that is implemented in Java 8 that can be run through the command line. 
 ## Complexity
 
