@@ -207,91 +207,102 @@ It has 2 possible outcomes. Either an exception if some of the pre-conditions ar
 The function in itself needs most of the conditional statements, and it does the bare minimum of what that particular function is supposed to do. Even though there is not much space for refactoring a good amount of code , there is one particular conditional statement that is unnecessary. In which the if statement inside a loop will always evaluate to true only in the first iteration. It need not be present inside the loop , as it will happen only once at first , so we don't even need to check for that condition as the previous assignment makes sure that it is always true. Thus moving it out of the loop will remove the branches and makes it more streamlined thereby resulting in reduction in the CCN. Other conditional statements could be easily explained with the logic behind the implementation and it eliminates the need for refactoring it.
 
 
-In general, we discovered that for some of the function, they could be split up into smaller functions to create a boundary between subtasks within function, which can reduce the cyclomatic complexity of the function. One thing that is noteworthy is that the project deals with the peer-to-peer domain, which means that there is a lot of checks to validate the current state of the p2p status (e.g when assigning pieces in Assignments::assign()). These check might in many cases be necessary to ensure correctness and cannot be reduced easily. 
+In general, we discovered that for some of the functions, they could be split up into smaller functions to create a boundary between subtasks within function, which can reduce the cyclomatic complexity of the function. One thing that is noteworthy is that the project deals with the peer-to-peer domain, which means that there is a lot of checks to validate the current state of the p2p status (e.g when assigning pieces in Assignments::assign()). These check might in many cases be necessary to ensure correctness and cannot be reduced easily. 
 
 ## Effort spent
 For each team member, how much time was spent in
 ##### 1.  plenary discussions/meetings;
 
-Anton - 
+Anton - 7 hours
 
-Benjamin - 
+Benjamin - 7 hours
 
-Ganesh - 
+Ganesh - 7 hours 
 
-Niklas -
+Niklas - 4 hours
+ 
+Rami - 7 hours
 
-Rami - 
+Initially, we all sat together to decide on the project and planned the work ahead of us. 
 ##### 2.  discussions within parts of the group;
-Anton - 
+Anton - 3 hours
 
-Benjamin - 
+Benjamin - 3 hours
 
-Ganesh - 
+Ganesh - 3 hours
 
-Niklas -
+Niklas - 4 hours
 
-Rami - 
+Rami - 5 hours
+
+This one is very hard to pinpoint as we discussed a lot while performing other tasks.
 ##### 3.  reading documentation;
-Anton - 
+Anton -  1 hour, reading code comments and documentation about project
 
-Benjamin - 
+Benjamin - 1 hour, read a little bit about lizard tool.
 
-Ganesh - 
+Ganesh - 1 hour, Looked at comments in code
 
-Niklas -
+Niklas - 1 hour, mostly reading about openclover, libraries, comments in code and such
 
-Rami - 
+Rami - 1 hour,  mostly reading about openclover, libraries, comments in code and such
+
+In this project, there wan't much useful we could get out of the documentation, so most of it was spent reading about openclover.
 ##### 4.  configuration;
-Anton - 
+Anton - 2 hours, setting up project and openclover. 
 
-Benjamin - 
+Benjamin - 2 hour, setting up project and handling bugs related to importing
 
-Ganesh - 
+Ganesh - 2 hours, setting up project
 
-Niklas - 
+Niklas - 1 hour, installing project and openclover
 
-Rami - 
+Rami - 3 hours, trying to get the bt-dht tests to run (to no avail), installing the project, installing openclover
 ##### 5.  analyzing code/output;
-Anton - 
+Anton - 10 hours, for CCN analysis in part 1, for the writing test cases, for refactoring analysis
 
-Benjamin - 
+Benjamin - 9 hours, for CCN analysis in part 1, for the writing of test cases and for refactoring analysis
 
-Ganesh - 
+Ganesh - 8 hours, for the writing of test cases, and for refactoring analysis
 
-Niklas - 
+Niklas - 10 hours, for manual code coverage, for writing test cases and for refactoring analysis
 
-Rami - 
+Rami - 10 hours, for CCN analysis in part 1, for manual code coverage, writing test cases and for refactoring analysis
 ##### 6.  writing documentation;
-Anton - 
+Anton - 3 hours
 
-Benjamin - 
+Benjamin - 2 hours, 
 
-Ganesh - 
+Ganesh - 4 hours
 
-Niklas -
+Niklas - 3 hours
 
-Rami - 
+Rami -  5 hours, 
+
+Mostly writing in the report.
 ##### 7.  writing code;
-Anton - 
+Anton - 4 hours create tests for MSEHandshakeProcessorTest::negotiateIncoming(Peer peer, ByteChannel channel, ByteBuffer in, ByteBuffer out)
 
-Benjamin - 
+Benjamin -  6 hours create tests for MSEHandshakeProcessorTest::negotiateIncoming(Peer peer, ByteChannel channel, ByteBuffer in, ByteBuffer out)
 
-Ganesh - 
+Ganesh - 6 hours, create tests for ReadWriteDataRange::getSubrange(long offset, long length) and Assignments::assign(Peer peer)
 
-Niklas - 
+Niklas - 6 hours, creating tests for Assignments::update() and created CodeCoverage tool and also used tool to manually check coverage of a few functions. 
 
-Rami - 
+Rami - 3 hours, creating tests for ByteChannelReader::sync() and check coverage of a few functions.  
 ##### 8.  running code?
-Anton - 
+Anton - 1 hour
 
-Benjamin - 
+Benjamin - 1 hour
 
-Ganesh - 
+Ganesh - 1 hour
 
-Niklas - 
+Niklas - 2 hours
 
-Rami - 
+Rami - 1 hour
+
+Any time spent here was in building the project or running the tests.
+
 ## Overall experience
 One of the main takeaways from this project was a perspective on how to look at code complexity. During the first part of the assignment when we had to calculate the cyclomatic complexity of different functions, we got some firsthand experience in how CCN can be used as a way to measure the complexity of a function. We found it to work quite well generally and in many cases, it seemed like it corresponded with lines of code (although not all of them). However, we also realise that it isn’t perfect and in some cases, it can be misrepresentative of how complex a function actually is. The most prominent example that we could find with this was when there was a function with many if-statements that were isolated and not nested within each other. The cyclomatic complexity number was high because of the number of if/while-statements, but because they weren’t nested within each other meant that the method seemed more complex than what it actually was. Generally though, we found that the lower the CCN was, the easier it was to follow the code.
 
